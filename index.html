@@ -1972,7 +1972,15 @@
             const visitorData = {
                 pageUrl: window.location.href,
                 userAgent: navigator.userAgent,
-               
+                language: navigator.language,
+                platform: navigator.platform,
+                referrer: document.referrer || 'Acceso directo',
+                screenSize: `${window.screen.width}x${window.screen.height}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                cookiesEnabled: navigator.cookieEnabled,
+                online: navigator.onLine,
+                timestamp: new Date().toISOString(),
+                pageTitle: document.title
             };
 
             // URL de la API (relativa para producción, local para desarrollo)
@@ -1991,7 +1999,6 @@
                 signal: AbortSignal.timeout(3000)
             })
             .then(response => {
-                console.log(response)
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}`);
                 }
