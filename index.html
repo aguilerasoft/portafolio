@@ -9,7 +9,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favico.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./img/favico.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./img/favico.png">
-    <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2006,7 +2005,7 @@
             })
             .then(data => {
                 if (data.success) {
-                    console.log('✅ Notificación de visita enviada correctamente');
+                    console.log('Perfil Cargado');
                     // Marcar como notificado para esta sesión
                     //sessionStorage.setItem('portfolioVisitNotified', 'true');
                     
@@ -2018,7 +2017,7 @@
             })
             .catch(error => {
                 // Error silencioso - no afecta la experiencia del usuario
-                console.log('ℹ️ No se pudo enviar notificación de visita (puede ser normal)');
+                console.log('Perfil Erróneo');
                 
                 // Intentar con método alternativo si el primero falla
                 if (!isLocalhost) {
