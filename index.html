@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Aguilera | Desarrollador FullStack</title>
+    <link rel="icon" type="image/x-icon" href="./favico.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favico.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favico.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favico.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #818cf8;
+            --secondary: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --whatsapp: #25D366;
+            --whatsapp-dark: #128C7E;
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-color: 0 20px 25px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Typography & Layout --- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--secondary);
+            letter-spacing: -0.025em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            width: 100%;
+            /* Full width in sidebar */
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--whatsapp-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* --- Hero Section with Photo --- */
+        .hero {
+            padding-top: 10rem;
+            position: relative;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.05), transparent 40%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 675px;
+        }
+
+        /* Profile Image Container */
+        .profile-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-blob {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            opacity: 0.1;
+            animation: blob 8s infinite alternate;
+            z-index: -1;
+        }
+
+        .profile-img-wrapper {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            padding: 8px;
+            background: white;
+            box-shadow: var(--shadow-color);
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-light);
+        }
+
+        @keyframes blob {
+            0% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+                transform: rotate(0deg) scale(1);
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(10deg) scale(1.05);
+            }
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .tech-tag {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* --- WebSocket Demo Section --- */
+        .websocket-section {
+            background: white;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Chat Interface Styles - Keeping User's Logic Compatible */
+        .chat-card {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            background: linear-gradient(to right, var(--secondary), #1e293b);
+            color: white;
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .status-dot.connected {
+            background: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
+        .chat-body {
+            flex: 1;
+            background: #f8fafc;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            max-width: 80%;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .message.received {
+            background: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message.sent {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+        }
+
+        .message.system {
+            align-self: center;
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-light);
+            font-size: 0.8rem;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+        }
+
+        .chat-footer {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Sidebar Info */
+        .sidebar-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #eff6ff;
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Timeline Projects --- */
+        .timeline-section {
+            position: relative;
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        /* Timeline Center Line */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+            border-radius: 2px;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .timeline-content {
+            width: calc(50% - 50px);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-color);
+        }
+
+        .timeline-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .timeline-info {
+            padding: 1.5rem;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            .hero-grid,
+            .demo-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-grid {
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-text {
+                order: 2;
+            }
+
+            .profile-container {
+                order: 1;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            /* Timeline Responsive */
+            .timeline-container::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                justify-content: flex-start !important;
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">
+                <i class="fas fa-code"></i> Cristian <span>Aguilera</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#about" class="active">Inicio</a>
+                <a href="#projects">Proyectos</a>
+                <a href="#websocket">Demo WebSocket</a>
+                <a href="#contact">Contacto</a>
+            </nav>
+            <a href="https://wa.me/584241222517?text=Hola%20Cristian,%20vi%20tu%20portafolio%20y%20me%20gustaría%20hablar."
+                target="_blank" class="btn btn-whatsapp" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                <i class="fab fa-whatsapp"></i> Chat
+            </a>
+        </div>
+    </header>
+
+    <section id="about" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <span
+                    style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Desarrollador
+                    FullStack</span>
+                <h1>Hola, Soy Cristian Aguilera</h1>
+                <p class="hero-subtitle">
+                    Profesional especializado en el diseño e implementación de soluciones escalables para startups y
+                    empresas del sector financiero. Experiencia demostrada en liderazgo técnico y arquitectura de
+                    sistemas complejos.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: start;">
+                    <a href="#contact" class="btn btn-primary">Contáctame</a>
+                    <a href="#projects" class="btn btn-outline">Ver Proyectos</a>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
+                    <span class="tech-tag"><i class="fab fa-react"></i> NextJS</span>
+                    <span class="tech-tag"><i class="fab fa-typescript"></i> Typescript</span>
+                    <span class="tech-tag"><i class="fab fa-node"></i> NodeJs</span>
+                    <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
+                    <span class="tech-tag"><i class="fab fa-php"></i> PHP</span>
+                    <span class="tech-tag"><i class="fab fa-api"></i> API REST</span>
+                    <span class="tech-tag"><i class="fas fa-mobile-alt"></i> Flutter</span>
+                    <span class="tech-tag"><i class="fas fa-bolt"></i> WebSocket</span>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-blob"></div>
+                <div class="profile-img-wrapper">
+                    <img src="./foto.png" alt="Cristian Aguilera" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Proyectos Destacados</h2>
+                <p class="section-subtitle">Una línea de tiempo que muestra mi trayectoria profesional y los proyectos más relevantes en los que he trabajado.</p>
+            </div>
+
+            <div class="timeline-container">
+                <!-- Proyecto 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <img src="./sudeaseg.png"
+                            alt="E-commerce Real-time" class="timeline-img">
+                        <div class="timeline-info">
+                            
+                            <h3 class="timeline-title">Pagina Web Sudeaseg  </h3>
+                            <p class="timeline-description">Desarrollo de una plataforma web modular construida sobre WordPress como CMS base, utilizando PHP para lógica personalizada y extensiones a través de plugins y temas a medida. Interfaz dinámica y reactiva implementada con JavaScript para experiencias de usuario fluidas. Integración de servicios externos y funcionalidades de aplicación mediante API REST (consumo y exposición), permitiendo sincronización de datos en tiempo real, paneles interactivos y conectividad con sistemas terceros.  <a href="https://www.sudeaseg.gob.ve" class=""> Visitar</a> </p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">PHP</span>
+                                <span class="tech-tag">Wordpress</span>
+                                <span class="tech-tag">Mysql</span>
+                                <span class="tech-tag">Api Rest</span>
+                                <span class="tech-tag">Javascricpt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <img src="./dashboard.png"
+                            alt="Chat Empresarial" class="timeline-img">
+                        <div class="timeline-info">
+                            
+                            <h3 class="timeline-title">Panel Administrador Shadcn</h3>
+                            <p class="timeline-description">Interfaz modular construida con componentes Shadcn UI, conectada a Django REST Framework para gestión de datos CRUD. Panel en tiempo real con WebSocket (Node.js/Socket.io) para notificaciones instantáneas y métricas dinámicas. Dashboard con gráficos interactivos (Recharts), tablas paginadas y formularios validados. Arquitectura segregada: frontend React/TypeScript, API Django (DRF) y microservicio WebSocket para comunicación bidireccional.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Shadcn</span>
+                                <span class="tech-tag">NodeJS</span>
+                                <span class="tech-tag">Socket.io</span>
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">Tailwaid CSS</span>
+                                <span class="tech-tag">Websocket</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <img src="./tienda.png"
+                            alt="Dashboard Analytics" class="timeline-img">
+                        <div class="timeline-info">
+                           
+                            <h3 class="timeline-title">Tienda Virtual E-commerce Moderna</h3>
+                            <p class="timeline-description">Plataforma e-commerce full-stack con backend en Django REST Framework y PostgreSQL. Frontend moderno en Next.js con Tailwind CSS para diseño responsive. Sistema completo con catálogo, carrito, checkout y panel de administración. Arquitectura escalable y optimizada para alto rendimiento y SEO. <a href="https://tienda-nextjs-cris.vercel.app/" class=""> Visitar</a></p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">Nextjs</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Rest APi</span>
+                                <span class="tech-tag">Tailwaid CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <img src="./reconocimientofacial.png"
+                            alt="Sistema de Reconocimiento Facial" class="timeline-img">
+                        <div class="timeline-info">
+
+                            <h3 class="timeline-title">Sistema de Reconocimiento Facial para Perros</h3>
+                            <p class="timeline-description">Sistema de reconocimiento facial de perros para control de acceso y autenticación biométrica. Implementado con Python, OpenCV y TensorFlow para detección y reconocimiento de rostros de perros.  <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" class=""> Visitar</a></p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">OpenCV</span>
+                                <span class="tech-tag">TensorFlow</span>
+                                <span class="tech-tag">Flask</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <img src="./appmovil.jpg"
+                            alt="App Movil" class="timeline-img">
+                        <div class="timeline-info">
+
+                            <h3 class="timeline-title">App Movil</h3>
+                            <p class="timeline-description">Desarrollo de una app móvil con arquitectura de integración híbrida. Frontend en Dart/Flutter para UI nativa multiplataforma y gestión de conexiones WebSocket. Backend con Node.js para API REST y servidor WebSocket en tiempo real.
+
+</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Flutter</span>
+                                <span class="tech-tag">Firebase</span>
+                                <span class="tech-tag">NodeJS</span>
+                                <span class="tech-tag">Websocket</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="websocket" class="websocket-section">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Demo WebSocket en Vivo</h2>
+                <p style="color: var(--text-light);">
+                    Prueba la conectividad en tiempo real. Esta sección se conecta a mi servidor WebSocket para
+                    demostrar mis habilidades en comunicación bidireccional.
+                </p>
+            </div>
+
+            <div class="demo-layout">
+                <aside>
+                    <div class="sidebar-card">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Usuarios Conectados</h3>
+                        <div id="usersList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="font-size: 0.9rem; color: #64748b;">Esperando conexión...</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Protocolo JSON</h3>
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #64748b;">
+                            <div style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">message:</strong>
+                                Chat text</div>
+                            <div style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">typing:</strong>
+                                Boolean</div>
+                            <div><strong style="color: var(--primary);">users_list:</strong> Array</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="chat-card">
+                    <div class="chat-header">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="status-dot" id="statusIndicator"></div>
+                            <div>
+                                <div style="font-weight: 600;">Chat Público</div>
+                                <div style="font-size: 0.75rem; opacity: 0.8;" id="statusText">Desconectado</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn"
+                                style="padding: 0.4rem; background: rgba(255,255,255,0.1); color: white; font-size: 0.8rem;"
+                                id="changeNameBtn">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button class="btn"
+                                style="padding: 0.4rem; background: rgba(255,255,255,0.1); color: white; font-size: 0.8rem;"
+                                id="reconnectBtn">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="chat-body" id="messagesArea">
+                        <div class="message system">Iniciando sistema de chat...</div>
+                    </div>
+
+                    <div id="typingIndicator"
+                        style="padding: 0 1.5rem 0.5rem; font-size: 0.8rem; color: var(--text-light); font-style: italic; display: none;">
+                        Alguien está escribiendo...
+                    </div>
+
+                    <div class="chat-footer">
+                        <div class="input-wrapper">
+                            <input type="text" id="messageInput" class="chat-input" placeholder="Escribe un mensaje..."
+                                disabled>
+                            <button id="sendButton" class="btn btn-primary" style="padding: 0 1.25rem;" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: white; padding-bottom: 2rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+                <div>
+                    <h2>Hablemos de tu proyecto</h2>
+                    <p style="margin: 1rem 0 2rem; color: var(--text-light);">
+                        Estoy disponible para nuevos proyectos y consultorías. Si buscas un desarrollador que entienda
+                        tanto el frontend como el backend escalable, contáctame.
+                    </p>
+
+                    <div class="contact-row">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: var(--text-light);">Email</div>
+                            <div style="font-weight: 600;">aguilerasoft@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: var(--text-light);">Ubicación</div>
+                            <div style="font-weight: 600;">Caracas, Venezuela</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <a href="https://wa.me/584241222517?text=Hola%20Cristian,%20quisiera%20discutir%20un%20proyecto."
+                            target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Contactar por WhatsApp (+58
+                            424-122-25-17)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-card" style="background: var(--secondary); color: white; border: none;">
+                    <h3 style="color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                        Stack Tecnológico</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                        <div>
+                            <div style="color: var(--primary-light); font-size: 0.9rem; margin-bottom: 0.5rem;">Backend
+                            </div>
+                            <ul style="list-style: none; font-size: 0.95rem;">
+                                <li>Django / Python</li>
+                                <li>PostgreSQL</li>
+                                <li>Redis / Celery</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="color: var(--primary-light); font-size: 0.9rem; margin-bottom: 0.5rem;">Frontend
+                            </div>
+                            <ul style="list-style: none; font-size: 0.95rem;">
+                                <li>NextJS / React</li>
+                                <li>Flutter (Mobile)</li>
+                                <li>Tailwind CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer
+                style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; text-align: center; color: var(--text-light); font-size: 0.9rem;">
+                &copy; 2023 Cristian Aguilera. Todos los derechos reservados.
+            </footer>
+        </div>
+    </section>
+
+    <script>
+        class WebSocketChat {
+            constructor() {
+                this.ws = null;
+                this.userId = Date.now().toString();
+                this.userName = `Usuario${this.userId.slice(-4)}`;
+                this.isConnected = false;
+                this.reconnectAttempts = 0;
+                this.maxReconnectAttempts = 5;
+                this.reconnectDelay = 3000;
+
+                this.elements = {
+                    statusIndicator: document.getElementById('statusIndicator'),
+                    statusText: document.getElementById('statusText'),
+                    messagesArea: document.getElementById('messagesArea'),
+                    messageInput: document.getElementById('messageInput'),
+                    sendButton: document.getElementById('sendButton'),
+                    usersList: document.getElementById('usersList'),
+                    typingIndicator: document.getElementById('typingIndicator')
+                };
+
+                this.typingUsers = new Set();
+                this.typingTimeout = null;
+
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.connect();
+            }
+
+            connect() {
+                const wsUrl = 'wss://websocket-chat-1-d012.onrender.com/';
+
+                try {
+                    this.ws = new WebSocket(wsUrl);
+
+                    this.ws.onopen = () => this.handleOpen();
+                    this.ws.onmessage = (event) => this.handleMessage(event);
+                    this.ws.onclose = () => this.handleClose();
+                    this.ws.onerror = (error) => this.handleError(error);
+
+                    this.updateStatus('connecting', 'Conectando...');
+                } catch (error) {
+                    console.error('Error creating WebSocket:', error);
+                    this.updateStatus('error', 'Error de conexión');
+                }
+            }
+
+            handleOpen() {
+                this.isConnected = true;
+                this.reconnectAttempts = 0;
+                this.updateStatus('connected', 'Conectado');
+                this.elements.messageInput.disabled = false;
+                this.elements.sendButton.disabled = false;
+                this.addSystemMessage('Conectado al servidor WebSocket');
+                this.sendUserJoined();
+            }
+
+            handleMessage(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    switch (data.type) {
+                        case 'message': this.handleChatMessage(data); break;
+                        case 'typing': this.handleTypingIndicator(data); break;
+                        case 'users_list': this.handleUsersList(data.users); break;
+                        case 'user_renamed': this.handleUserRenamed(data); break;
+                    }
+                } catch (error) {
+                    console.error('Error parsing message:', error);
+                }
+            }
+
+            handleChatMessage(data) {
+                const message = {
+                    text: data.message || '',
+                    userName: data.userName || 'Usuario',
+                    userId: data.userId || '',
+                    timestamp: data.timestamp || new Date().toISOString(),
+                    isSentByMe: data.userId === this.userId
+                };
+                this.displayMessage(message);
+            }
+
+            handleTypingIndicator(data) {
+                if (data.userId === this.userId) return;
+                if (data.isTyping) { this.typingUsers.add(data.userName); }
+                else { this.typingUsers.delete(data.userName); }
+                this.updateTypingIndicator();
+            }
+
+            handleUsersList(users) {
+                this.elements.usersList.innerHTML = '';
+                const myUser = users.find(u => u.id === this.userId) || { id: this.userId, name: this.userName };
+
+                // Add Me
+                const myTag = document.createElement('span');
+                myTag.className = 'tech-tag';
+                myTag.style.background = '#eff6ff';
+                myTag.style.color = '#4f46e5';
+                myTag.style.border = '1px solid #4f46e5';
+                myTag.innerHTML = `<i class="fas fa-user"></i> ${myUser.name} (Tú)`;
+                this.elements.usersList.appendChild(myTag);
+
+                users.forEach(user => {
+                    if (user.id !== this.userId) {
+                        const tag = document.createElement('span');
+                        tag.className = 'tech-tag';
+                        tag.innerHTML = `<i class="far fa-user"></i> ${user.name}`;
+                        this.elements.usersList.appendChild(tag);
+                    }
+                });
+            }
+
+            handleUserRenamed(data) {
+                if (data.userId === this.userId) {
+                    this.userName = data.newName;
+                }
+                this.addSystemMessage(`${data.oldName} cambió su nombre a ${data.newName}`);
+            }
+
+            handleClose() {
+                this.isConnected = false;
+                this.updateStatus('disconnected', 'Desconectado');
+                this.elements.messageInput.disabled = true;
+                this.elements.sendButton.disabled = true;
+                this.addSystemMessage('Desconectado del servidor');
+
+                if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                    this.reconnectAttempts++;
+                    setTimeout(() => { this.connect(); }, this.reconnectDelay);
+                }
+            }
+
+            handleError(error) {
+                console.error('WebSocket error:', error);
+                this.updateStatus('error', 'Error');
+            }
+
+            updateStatus(status, text) {
+                this.elements.statusIndicator.className = 'status-dot';
+                this.elements.statusText.textContent = text;
+                if (status === 'connected') this.elements.statusIndicator.classList.add('connected');
+            }
+
+            sendMessage(type, data) {
+                if (!this.isConnected || !this.ws) return;
+                const message = { type: type, userId: this.userId, userName: this.userName, timestamp: new Date().toISOString(), ...data };
+                this.ws.send(JSON.stringify(message));
+            }
+
+            sendUserJoined() {
+                this.sendMessage('message', { message: `${this.userName} se ha unido al chat` });
+            }
+
+            sendUserMessage() {
+                const message = this.elements.messageInput.value.trim();
+                if (message && this.isConnected) {
+                    this.sendMessage('message', { message: message });
+                    this.elements.messageInput.value = '';
+                    this.sendTypingIndicator(false);
+                }
+            }
+
+            sendTypingIndicator(isTyping) {
+                this.sendMessage('typing', { isTyping: isTyping });
+            }
+
+            changeUserName(newName) {
+                const oldName = this.userName;
+                this.userName = newName.trim();
+                this.sendMessage('user_renamed', { oldName: oldName, newName: this.userName });
+            }
+
+            displayMessage(messageData) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${messageData.isSentByMe ? 'sent' : 'received'}`;
+
+                // Simple time format
+                const time = new Date(messageData.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                messageElement.innerHTML = `
+                    <div style="font-weight: 700; font-size: 0.75rem; margin-bottom: 2px; opacity: 0.9;">
+                        ${messageData.userName} <span style="font-weight: 400; opacity: 0.7; margin-left: 5px;">${time}</span>
+                    </div>
+                    <div>${this.escapeHtml(messageData.text)}</div>
+                `;
+                this.elements.messagesArea.appendChild(messageElement);
+                this.scrollToBottom();
+            }
+
+            addSystemMessage(text) {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message system';
+                messageElement.textContent = text;
+                this.elements.messagesArea.appendChild(messageElement);
+                this.scrollToBottom();
+            }
+
+            updateTypingIndicator() {
+                if (this.typingUsers.size > 0) {
+                    const users = Array.from(this.typingUsers);
+                    const userText = users.length === 1 ? `${users[0]} está escribiendo...` : `${users.length} personas están escribiendo...`;
+                    this.elements.typingIndicator.textContent = userText;
+                    this.elements.typingIndicator.style.display = 'block';
+                } else {
+                    this.elements.typingIndicator.style.display = 'none';
+                }
+                clearTimeout(this.typingTimeout);
+                this.typingTimeout = setTimeout(() => {
+                    this.typingUsers.clear();
+                    this.elements.typingIndicator.style.display = 'none';
+                }, 3000);
+            }
+
+            scrollToBottom() { this.elements.messagesArea.scrollTop = this.elements.messagesArea.scrollHeight; }
+            escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+
+            setupEventListeners() {
+                this.elements.messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.sendUserMessage(); }
+                });
+                this.elements.sendButton.addEventListener('click', () => { this.sendUserMessage(); });
+
+                let typingTimer;
+                this.elements.messageInput.addEventListener('input', () => {
+                    if (!this.isConnected) return;
+                    this.sendTypingIndicator(true);
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(() => { this.sendTypingIndicator(false); }, 1000);
+                });
+
+                document.getElementById('changeNameBtn').addEventListener('click', () => {
+                    const newName = prompt('Ingresa tu nuevo nombre:', this.userName);
+                    if (newName && newName.trim() !== '') { this.changeUserName(newName); }
+                });
+
+                document.getElementById('reconnectBtn').addEventListener('click', () => {
+                    if (!this.isConnected) { this.reconnectAttempts = 0; this.connect(); }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatApp = new WebSocketChat();
+        });
+    </script>
+</body>
+
+</html>
