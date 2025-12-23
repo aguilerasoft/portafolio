@@ -1963,9 +1963,9 @@
                         window.location.hostname === '127.0.0.1';
     
     // Solo enviar una notificación por sesión
-    const alreadyNotified = sessionStorage.getItem('portfolioVisitNotified');
+    //const alreadyNotified = sessionStorage.getItem('portfolioVisitNotified');
     
-    if (!isLocalhost && !alreadyNotified) {
+    if (!isLocalhost) {
         // Esperar 2 segundos para no bloquear la carga de la página
         setTimeout(() => {
             // Recolectar información del visitante
@@ -2008,7 +2008,7 @@
                 if (data.success) {
                     console.log('✅ Notificación de visita enviada correctamente');
                     // Marcar como notificado para esta sesión
-                    sessionStorage.setItem('portfolioVisitNotified', 'true');
+                    //sessionStorage.setItem('portfolioVisitNotified', 'true');
                     
                     // Opcional: enviar también a analytics
                     if ('ga' in window) {
