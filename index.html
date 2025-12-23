@@ -47,6 +47,7 @@
             /* Colores específicos */
             --whatsapp: #25D366;
             --whatsapp-dark: #128C7E;
+            --whatsapp-hover: #22c55e;
             --linkedin: #0A66C2;
             --github: #333333;
             
@@ -809,11 +810,18 @@
             font-size: 0.9rem;
         }
 
-        /* Download CV Button */
-        .download-cv-btn {
+        /* Botones flotantes */
+        .floating-buttons {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .download-cv-btn {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, var(--success), var(--success-dark));
@@ -824,8 +832,8 @@
             justify-content: center;
             box-shadow: var(--shadow-lg);
             text-decoration: none;
-            z-index: 1000;
             transition: all var(--transition-base);
+            position: relative;
         }
 
         .download-cv-btn:hover {
@@ -835,6 +843,69 @@
 
         .download-cv-btn i {
             font-size: 1.5rem;
+        }
+
+        .whatsapp-float-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-hover));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            text-decoration: none;
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, var(--whatsapp-dark), var(--whatsapp));
+        }
+
+        .whatsapp-float-btn i {
+            font-size: 1.8rem;
+        }
+
+        /* Tooltips para botones flotantes */
+        .floating-btn-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
+            pointer-events: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .floating-btn-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -5px;
+            transform: translateY(-50%);
+            border-width: 5px 0 5px 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent var(--secondary);
+        }
+
+        .download-cv-btn:hover .floating-btn-tooltip,
+        .whatsapp-float-btn:hover .floating-btn-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px;
         }
 
         /* Responsive Design */
@@ -984,6 +1055,27 @@
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
+            
+            /* Botones flotantes más pequeños en tablet */
+            .floating-buttons {
+                bottom: 20px;
+                right: 20px;
+                gap: 12px;
+            }
+            
+            .download-cv-btn,
+            .whatsapp-float-btn {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .download-cv-btn i {
+                font-size: 1.4rem;
+            }
+            
+            .whatsapp-float-btn i {
+                font-size: 1.6rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1018,15 +1110,30 @@
                 font-size: 0.9rem;
             }
             
-            .download-cv-btn {
+            /* Botones flotantes más pequeños en móvil */
+            .floating-buttons {
+                bottom: 15px;
+                right: 15px;
+                gap: 10px;
+            }
+            
+            .download-cv-btn,
+            .whatsapp-float-btn {
                 width: 50px;
                 height: 50px;
-                bottom: 20px;
-                right: 20px;
             }
             
             .download-cv-btn i {
                 font-size: 1.25rem;
+            }
+            
+            .whatsapp-float-btn i {
+                font-size: 1.5rem;
+            }
+            
+            /* Ocultar tooltips en móvil */
+            .floating-btn-tooltip {
+                display: none;
             }
         }
 
@@ -1109,10 +1216,7 @@
                 <a href="#projects">Proyectos</a>
                 <a href="#websocket">Demo WebSocket</a>
                 <a href="#contact">Contacto</a>
-                <a href="https://wa.me/584241222517?text=Hola%20Cristian,%20vi%20tu%20portafolio%20y%20me%20gustaría%20hablar."
-                   target="_blank" class="btn btn-whatsapp" style="padding: 0.5rem 1.25rem; font-size: 0.9rem;">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
+               
             </nav>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1190,7 +1294,7 @@
                     <div class="timeline-content">
                         <img src="./sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental" class="timeline-img">
                         <div class="timeline-info">
-                            
+                            <span class="timeline-date">2023 - Presente</span>
                             <h3 class="timeline-title">Página Web Sudeaseg</h3>
                             <p class="timeline-description">Desarrollo de una plataforma web modular construida sobre WordPress como CMS base, utilizando PHP para lógica personalizada y extensiones a través de plugins y temas a medida. Interfaz dinámica y reactiva implementada con JavaScript para experiencias de usuario fluidas. Integración de servicios externos y funcionalidades de aplicación mediante API REST.</p>
                             <div class="tech-tags">
@@ -1213,7 +1317,7 @@
                     <div class="timeline-content">
                         <img src="./dashboard.png" alt="Dashboard Administrador Shadcn" class="timeline-img">
                         <div class="timeline-info">
-                            
+                            <span class="timeline-date">2023 - 2024</span>
                             <h3 class="timeline-title">Panel Administrador Shadcn</h3>
                             <p class="timeline-description">Interfaz modular construida con componentes Shadcn UI, conectada a Django REST Framework para gestión de datos CRUD. Panel en tiempo real con WebSocket (Node.js/Socket.io) para notificaciones instantáneas y métricas dinámicas. Dashboard con gráficos interactivos (Recharts), tablas paginadas y formularios validados.</p>
                             <div class="tech-tags">
@@ -1234,7 +1338,7 @@
                     <div class="timeline-content">
                         <img src="./tienda.png" alt="Tienda Virtual E-commerce Moderna" class="timeline-img">
                         <div class="timeline-info">
-                            
+                            <span class="timeline-date">2023</span>
                             <h3 class="timeline-title">Tienda Virtual E-commerce Moderna</h3>
                             <p class="timeline-description">Plataforma e-commerce full-stack con backend en Django REST Framework y PostgreSQL. Frontend moderno en Next.js con Tailwind CSS para diseño responsive. Sistema completo con catálogo, carrito, checkout y panel de administración. Arquitectura escalable y optimizada para alto rendimiento y SEO.</p>
                             <div class="tech-tags">
@@ -1258,7 +1362,7 @@
                     <div class="timeline-content">
                         <img src="./reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros" class="timeline-img">
                         <div class="timeline-info">
-                            
+                            <span class="timeline-date">2022 - 2023</span>
                             <h3 class="timeline-title">Sistema de Reconocimiento Facial para Perros</h3>
                             <p class="timeline-description">Sistema de reconocimiento facial de perros para control de acceso y autenticación biométrica. Implementado con Python, OpenCV y TensorFlow para detección y reconocimiento de rostros de perros. Incluye interfaz web para administración y reportes, con capacidad de procesamiento en tiempo real.</p>
                             <div class="tech-tags">
@@ -1281,7 +1385,7 @@
                     <div class="timeline-content">
                         <img src="./appmovil.jpg" alt="Aplicación Móvil Flutter" class="timeline-img">
                         <div class="timeline-info">
-                            
+                            <span class="timeline-date">2022 - 2023</span>
                             <h3 class="timeline-title">App Móvil con Integración WebSocket</h3>
                             <p class="timeline-description">Desarrollo de una app móvil con arquitectura de integración híbrida. Frontend en Dart/Flutter para UI nativa multiplataforma y gestión de conexiones WebSocket. Backend con Node.js para API REST y servidor WebSocket en tiempo real. Incluye autenticación, notificaciones push y sincronización offline.</p>
                             <div class="tech-tags">
@@ -1440,7 +1544,7 @@
             </div>
 
             <footer>
-                <p>&copy; 2024 Cristian Aguilera. Todos los derechos reservados.</p>
+                <p>&copy; 2026 Cristian Aguilera. Todos los derechos reservados.</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85rem;">
                     Desarrollado con <i class="fas fa-heart" style="color: #ef4444;"></i> usando HTML, CSS y JavaScript
                 </p>
@@ -1448,10 +1552,21 @@
         </div>
     </section>
 
-    <!-- Download CV Button -->
-    <a href="./Curriculum_Cristian_Aguilera_2026.pdf" download class="download-cv-btn" title="Descargar Curriculum">
-        <i class="fas fa-file-download"></i>
-    </a>
+    <!-- Botones flotantes -->
+    <div class="floating-buttons">
+        <!-- Botón WhatsApp flotante -->
+        <a href="https://wa.me/584241222517?text=Hola%20Cristian,%20vi%20tu%20portafolio%20y%20me%20gustaría%20hablar."
+           target="_blank" class="whatsapp-float-btn" title="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="floating-btn-tooltip">Contactar por WhatsApp</span>
+        </a>
+        
+        <!-- Botón Descargar CV flotante -->
+        <a href="./Curriculum_Cristian_Aguilera_2026.pdf" download class="download-cv-btn" title="Descargar Curriculum">
+            <i class="fas fa-file-download"></i>
+            <span class="floating-btn-tooltip">Descargar CV</span>
+        </a>
+    </div>
 
     <script>
         // WebSocket Chat Application
