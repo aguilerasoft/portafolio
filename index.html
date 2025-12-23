@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cristian Aguilera | Desarrollador FullStack</title>
-    <link rel="icon" type="image/x-icon" href="./favico.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favico.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favico.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./favico.png">
+    <link rel="icon" type="image/x-icon" href="./img/favico.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favico.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favico.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favico.png">
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1278,7 +1278,7 @@
             <div class="profile-container">
                 <div class="profile-blob"></div>
                 <div class="profile-img-wrapper">
-                    <img src="./foto.png" alt="Cristian Aguilera - Desarrollador FullStack" class="profile-img">
+                    <img src="./img/foto.png" alt="Cristian Aguilera - Desarrollador FullStack" class="profile-img">
                 </div>
             </div>
         </div>
@@ -1297,7 +1297,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <img src="./sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental" class="timeline-img">
+                        <img src="./img/sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental" class="timeline-img">
                         <div class="timeline-info">
                             <span class="timeline-date">2023 - Presente</span>
                             <h3 class="timeline-title">Página Web Sudeaseg</h3>
@@ -1320,7 +1320,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <img src="./dashboard.png" alt="Dashboard Administrador Shadcn" class="timeline-img">
+                        <img src="./img/dashboard.png" alt="Dashboard Administrador Shadcn" class="timeline-img">
                         <div class="timeline-info">
                             <span class="timeline-date">2023 - 2024</span>
                             <h3 class="timeline-title">Panel Administrador Shadcn</h3>
@@ -1341,7 +1341,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <img src="./tienda.png" alt="Tienda Virtual E-commerce Moderna" class="timeline-img">
+                        <img src="./img/tienda.png" alt="Tienda Virtual E-commerce Moderna" class="timeline-img">
                         <div class="timeline-info">
                             <span class="timeline-date">2023</span>
                             <h3 class="timeline-title">Tienda Virtual E-commerce Moderna</h3>
@@ -1365,7 +1365,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <img src="./reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros" class="timeline-img">
+                        <img src="./img/reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros" class="timeline-img">
                         <div class="timeline-info">
                             <span class="timeline-date">2022 - 2023</span>
                             <h3 class="timeline-title">Sistema de Reconocimiento Facial para Perros</h3>
@@ -1388,7 +1388,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <img src="./appmovil.jpg" alt="Aplicación Móvil Flutter" class="timeline-img">
+                        <img src="./img/appmovil.jpg" alt="Aplicación Móvil Flutter" class="timeline-img">
                         <div class="timeline-info">
                             <span class="timeline-date">2022 - 2023</span>
                             <h3 class="timeline-title">App Móvil con Integración WebSocket</h3>
@@ -1567,7 +1567,7 @@
         </a>
         
         <!-- Botón Descargar CV flotante -->
-        <a href="./Curriculum_Cristian_Aguilera_2026.pdf" download class="download-cv-btn" title="Descargar Curriculum">
+        <a href="./img/Curriculum_Cristian_Aguilera_2026.pdf" download class="download-cv-btn" title="Descargar Curriculum">
             <i class="fas fa-file-download"></i>
             <span class="floating-btn-tooltip">Descargar CV</span>
         </a>
@@ -1952,6 +1952,90 @@
         document.addEventListener('DOMContentLoaded', () => {
             const chatApp = new WebSocketChat();
         });
+
+        // ============================================
+// NOTIFICACIÓN AUTOMÁTICA DE VISITAS
+// ============================================
+
+(function() {
+    // Solo ejecutar en producción (no en localhost para evitar spam)
+    const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+    
+    // Solo enviar una notificación por sesión
+    const alreadyNotified = sessionStorage.getItem('portfolioVisitNotified');
+    
+    if (!isLocalhost && !alreadyNotified) {
+        // Esperar 2 segundos para no bloquear la carga de la página
+        setTimeout(() => {
+            // Recolectar información del visitante
+            const visitorData = {
+                pageUrl: window.location.href,
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                platform: navigator.platform,
+                referrer: document.referrer || 'Acceso directo',
+                screenSize: `${window.screen.width}x${window.screen.height}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                cookiesEnabled: navigator.cookieEnabled,
+                online: navigator.onLine,
+                timestamp: new Date().toISOString(),
+                pageTitle: document.title
+            };
+
+            // URL de la API (relativa para producción, local para desarrollo)
+            const apiUrl = isLocalhost 
+                ? 'http://localhost:3000/api/notify-visit'
+                : '/api/notify-visit';
+
+            // Enviar datos de forma asíncrona y silenciosa
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(visitorData),
+                // Timeout de 3 segundos (no bloquear si hay error)
+                signal: AbortSignal.timeout(3000)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    console.log('✅ Notificación de visita enviada correctamente');
+                    // Marcar como notificado para esta sesión
+                    sessionStorage.setItem('portfolioVisitNotified', 'true');
+                    
+                    // Opcional: enviar también a analytics
+                    if ('ga' in window) {
+                        ga('send', 'event', 'Visit', 'Notification Sent');
+                    }
+                }
+            })
+            .catch(error => {
+                // Error silencioso - no afecta la experiencia del usuario
+                console.log('ℹ️ No se pudo enviar notificación de visita (puede ser normal)');
+                
+                // Intentar con método alternativo si el primero falla
+                if (!isLocalhost) {
+                    setTimeout(() => {
+                        // Método alternativo simple
+                        const img = new Image();
+                        img.src = `https://api.countapi.xyz/hit/portfolio-cristian-aguilera/visit?callback=${Date.now()}`;
+                    }, 1000);
+                }
+            });
+        }, 2000); // Esperar 2 segundos antes de enviar
+    } else if (isLocalhost) {
+        console.log('🛠️ Modo desarrollo: Notificación de visita desactivada');
+    }
+})();
+
+        
     </script>
 </body>
 
