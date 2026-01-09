@@ -546,127 +546,416 @@
             color: var(--primary);
         }
 
-        /* Timeline Projects */
-        .timeline-section {
-            position: relative;
-            background: white;
-        }
-
-        .timeline-container {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 4rem;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .timeline-item:nth-child(odd) {
-            justify-content: flex-start;
-        }
-
-        .timeline-item:nth-child(even) {
-            justify-content: flex-end;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 24px;
-            height: 24px;
-            background: white;
-            border: 4px solid var(--primary);
-            border-radius: 50%;
-            z-index: 10;
-            box-shadow: 0 0 0 6px rgba(67, 97, 238, 0.1);
-        }
-
-        .timeline-content {
-            width: calc(50% - 50px);
+        /* Projects Section - Nuevo Estilo */
+        .projects-section {
             background: var(--bg-white);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
             border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
             box-shadow: var(--shadow-lg);
             overflow: hidden;
-            border: 1px solid var(--border-light);
             transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        .timeline-content:hover {
-            transform: translateY(-8px);
+        .project-card:hover {
+            transform: translateY(-10px);
             box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
         }
 
-        .timeline-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 1px solid var(--border-light);
+        .project-header {
+            padding: 1.25rem 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .timeline-info {
-            padding: 1.75rem;
+        .project-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-md);
         }
 
-        .timeline-date {
-            display: inline-block;
-            background: var(--primary-ultra-light);
-            color: var(--primary);
-            padding: 0.375rem 1.25rem;
+        .status-badge {
+            padding: 0.25rem 0.75rem;
             border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(67, 97, 238, 0.2);
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        .timeline-title {
-            font-size: 1.4rem;
+        .status-badge.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.completed {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(67, 97, 238, 0.3);
+        }
+
+        .project-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-view-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+        }
+
+        .project-view-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 0.75rem;
-            color: var(--secondary);
+            flex-wrap: wrap;
         }
 
-        .timeline-description {
+        .project-date, .project-category {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .project-category {
+            background: var(--primary-ultra-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            color: var(--primary);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            line-height: 1.3;
+        }
+
+        .project-description {
             color: var(--text-light);
             margin-bottom: 1.5rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-item {
+            background: var(--bg-light);
+            padding: 0.375rem 0.875rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-main);
+            border: 1px solid var(--border-light);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .project-link, .project-info-btn {
+            flex: 1;
+            padding: 0.625rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            text-decoration: none;
         }
 
         .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
             background: var(--primary-ultra-light);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-fast);
+            color: var(--primary);
         }
 
         .project-link:hover {
             background: var(--primary);
             color: white;
-            transform: translateX(5px);
+        }
+
+        .project-info-btn {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border-medium);
+        }
+
+        .project-info-btn:hover {
+            background: var(--bg-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Card de más proyectos */
+        .project-more {
+            background: linear-gradient(135deg, var(--bg-light), white);
+            border: 2px dashed var(--border-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-more-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .project-more-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-ultra-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .project-more h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .project-more p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Modal de detalles del proyecto */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1100;
+            display: none;
+        }
+
+        .project-modal.active {
+            display: block;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .modal-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-meta span {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal-image {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-description h4 {
+            margin: 1.5rem 0 0.75rem;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .modal-description p, .modal-description ul {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .modal-description ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .modal-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
         }
 
         /* WebSocket Demo Section */
@@ -1009,6 +1298,10 @@
             .hero-grid {
                 gap: 3rem;
             }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
         }
 
         @media (max-width: 900px) {
@@ -1039,28 +1332,6 @@
                 justify-content: center;
             }
             
-            /* Timeline Responsive */
-            .timeline-container::before {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                justify-content: flex-start !important;
-                padding-left: 60px;
-            }
-            
-            .timeline-content {
-                width: 100%;
-            }
-            
-            .timeline-dot {
-                left: 30px;
-            }
-            
-            .timeline-item:nth-child(even) .timeline-dot {
-                left: 30px;
-            }
-            
             /* Navigation - Mostrar botón móvil */
             .nav-links {
                 display: none;
@@ -1068,6 +1339,11 @@
             
             .mobile-menu-btn {
                 display: block;
+            }
+            
+            .modal-body {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
 
@@ -1106,15 +1382,26 @@
                 font-size: 0.95rem;
             }
             
+            .projects-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 2rem auto 0;
+            }
+            
             .sidebar-card,
             .stack-card,
-            .timeline-info {
+            .project-content {
                 padding: 1.5rem;
             }
             
             .stack-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
             }
             
             /* Botones flotantes más pequeños en tablet */
@@ -1162,6 +1449,18 @@
                 font-size: 0.8rem;
             }
             
+            .project-header {
+                padding: 1rem 1rem 0;
+            }
+            
+            .project-content {
+                padding: 1.25rem;
+            }
+            
+            .project-actions {
+                flex-direction: column;
+            }
+            
             .chat-card {
                 height: 500px;
             }
@@ -1169,6 +1468,12 @@
             .message {
                 max-width: 90%;
                 font-size: 0.9rem;
+            }
+            
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+                padding: 1.5rem;
             }
             
             /* Botones flotantes más pequeños en móvil */
@@ -1288,129 +1593,263 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="timeline-section">
+    <!-- Projects Section - NUEVO DISEÑO -->
+    <section id="projects" class="projects-section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Proyectos Destacados</h2>
-                <p class="section-subtitle">Una línea de tiempo que muestra mi trayectoria profesional y los proyectos más relevantes en los que he trabajado.</p>
+                <p class="section-subtitle">Una colección de mis trabajos más relevantes, desde soluciones empresariales hasta aplicaciones innovadoras.</p>
             </div>
 
-            <div class="timeline-container">
+            <div class="projects-grid">
                 <!-- Proyecto 1 - Sudeaseg -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <img src="./img/sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental" class="timeline-img">
-                        <div class="timeline-info">
-                            <span class="timeline-date">2023 - Presente</span>
-                            <h3 class="timeline-title">Página Web Sudeaseg</h3>
-                            <p class="timeline-description">Desarrollo de una plataforma web modular construida sobre WordPress como CMS base, utilizando PHP para lógica personalizada y extensiones a través de plugins y temas a medida. Interfaz dinámica y reactiva implementada con JavaScript para experiencias de usuario fluidas. Integración de servicios externos y funcionalidades de aplicación mediante API REST.</p>
-                            <div class="tech-tags">
-                                <span class="tech-tag">PHP</span>
-                                <span class="tech-tag">WordPress</span>
-                                <span class="tech-tag">MySQL</span>
-                                <span class="tech-tag">API REST</span>
-                                <span class="tech-tag">JavaScript</span>
-                            </div>
-                            <a href="https://www.sudeaseg.gob.ve" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Visitar sitio web
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-badge" style="background: linear-gradient(135deg, #4361ee, #3a56d4);">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge active">Activo</span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="./img/sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental">
+                        <div class="project-overlay">
+                            <a href="https://www.sudeaseg.gob.ve" target="_blank" class="project-view-btn">
+                                <i class="fas fa-external-link-alt"></i>
                             </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2023 - Presente</span>
+                            <span class="project-category">Sitio Web Institucional</span>
+                        </div>
+                        <h3 class="project-title">Página Web Sudeaseg</h3>
+                        <p class="project-description">Plataforma web modular construida sobre WordPress como CMS base, con PHP para lógica personalizada y extensiones a través de plugins y temas a medida.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">WordPress</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">API REST</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://www.sudeaseg.gob.ve" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Visitar sitio
+                            </a>
+                            <button class="project-info-btn" data-project="sudeaseg">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Proyecto 2 - Panel Administrador -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <img src="./img/dashboard.png" alt="Dashboard Administrador Shadcn" class="timeline-img">
-                        <div class="timeline-info">
-                            <span class="timeline-date">2023 - 2024</span>
-                            <h3 class="timeline-title">Panel Administrador Shadcn</h3>
-                            <p class="timeline-description">Interfaz modular construida con componentes Shadcn UI, conectada a Django REST Framework para gestión de datos CRUD. Panel en tiempo real con WebSocket (Node.js/Socket.io) para notificaciones instantáneas y métricas dinámicas. Dashboard con gráficos interactivos (Recharts), tablas paginadas y formularios validados.</p>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Shadcn</span>
-                                <span class="tech-tag">NodeJS</span>
-                                <span class="tech-tag">Socket.io</span>
-                                <span class="tech-tag">Django</span>
-                                <span class="tech-tag">Tailwind CSS</span>
-                                <span class="tech-tag">WebSocket</span>
-                            </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-badge" style="background: linear-gradient(135deg, #7209b7, #9d4edd);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completado</span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="./img/dashboard.png" alt="Dashboard Administrador Shadcn">
+                        <div class="project-overlay">
+                            <button class="project-view-btn project-demo-btn" data-project="dashboard">
+                                <i class="fas fa-play-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2023 - 2024</span>
+                            <span class="project-category">Dashboard Admin</span>
+                        </div>
+                        <h3 class="project-title">Panel Administrador Shadcn</h3>
+                        <p class="project-description">Interfaz modular con componentes Shadcn UI conectada a Django REST Framework. Panel en tiempo real con WebSocket para notificaciones instantáneas.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Shadcn</span>
+                            <span class="tech-item">NodeJS</span>
+                            <span class="tech-item">Socket.io</span>
+                            <span class="tech-item">Django</span>
+                        </div>
+                        <div class="project-actions">
+                           
+                            <button class="project-info-btn" data-project="dashboard">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Proyecto 3 - Tienda E-commerce -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <img src="./img/tienda.png" alt="Tienda Virtual E-commerce Moderna" class="timeline-img">
-                        <div class="timeline-info">
-                            <span class="timeline-date">2023</span>
-                            <h3 class="timeline-title">Tienda Virtual E-commerce Moderna</h3>
-                            <p class="timeline-description">Plataforma e-commerce full-stack con backend en Django REST Framework y PostgreSQL. Frontend moderno en Next.js con Tailwind CSS para diseño responsive. Sistema completo con catálogo, carrito, checkout y panel de administración. Arquitectura escalable y optimizada para alto rendimiento y SEO.</p>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Django</span>
-                                <span class="tech-tag">NextJS</span>
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">REST API</span>
-                                <span class="tech-tag">Tailwind CSS</span>
-                                <span class="tech-tag">PostgreSQL</span>
-                            </div>
-                            <a href="https://tienda-nextjs-cris.vercel.app/" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Visitar demo
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-badge" style="background: linear-gradient(135deg, #10b981, #0da271);">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge active">Demo Activa</span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="./img/tienda.png" alt="Tienda Virtual E-commerce Moderna">
+                        <div class="project-overlay">
+                            <a href="https://tienda-nextjs-cris.vercel.app/" target="_blank" class="project-view-btn">
+                                <i class="fas fa-external-link-alt"></i>
                             </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2023</span>
+                            <span class="project-category">E-commerce</span>
+                        </div>
+                        <h3 class="project-title">Tienda Virtual E-commerce</h3>
+                        <p class="project-description">Plataforma e-commerce full-stack con backend en Django REST Framework y frontend en Next.js con Tailwind CSS. Sistema completo de catálogo y checkout.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Django</span>
+                            <span class="tech-item">NextJS</span>
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">PostgreSQL</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://tienda-nextjs-cris.vercel.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Ver demo
+                            </a>
+                            <button class="project-info-btn" data-project="tienda">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Proyecto 4 - Reconocimiento Facial -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <img src="./img/reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros" class="timeline-img">
-                        <div class="timeline-info">
-                            <span class="timeline-date">2022 - 2023</span>
-                            <h3 class="timeline-title">Sistema de Reconocimiento Facial para Perros</h3>
-                            <p class="timeline-description">Sistema de reconocimiento facial de perros para control de acceso y autenticación biométrica. Implementado con Python, OpenCV y TensorFlow para detección y reconocimiento de rostros de perros. Incluye interfaz web para administración y reportes, con capacidad de procesamiento en tiempo real.</p>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">OpenCV</span>
-                                <span class="tech-tag">TensorFlow</span>
-                                <span class="tech-tag">Flask</span>
-                                <span class="tech-tag">Machine Learning</span>
-                            </div>
-                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Ver documentación
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completado</span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="./img/reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros">
+                        <div class="project-overlay">
+                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank" class="project-view-btn">
+                                <i class="fas fa-external-link-alt"></i>
                             </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2022 - 2023</span>
+                            <span class="project-category">Inteligencia Artificial</span>
+                        </div>
+                        <h3 class="project-title">Reconocimiento Facial para Perros</h3>
+                        <p class="project-description">Sistema de reconocimiento facial de perros para control de acceso y autenticación biométrica con Python, OpenCV y TensorFlow.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">OpenCV</span>
+                            <span class="tech-item">TensorFlow</span>
+                            <span class="tech-item">Flask</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank" class="project-link">
+                                <i class="fas fa-file-alt"></i> Ver sitio
+                            </a>
+                            <button class="project-info-btn" data-project="facial">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Proyecto 5 - App Móvil -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <img src="./img/appmovil.jpg" alt="Aplicación Móvil Flutter" class="timeline-img">
-                        <div class="timeline-info">
-                            <span class="timeline-date">2022 - 2023</span>
-                            <h3 class="timeline-title">App Móvil con Integración WebSocket</h3>
-                            <p class="timeline-description">Desarrollo de una app móvil con arquitectura de integración híbrida. Frontend en Dart/Flutter para UI nativa multiplataforma y gestión de conexiones WebSocket. Backend con Node.js para API REST y servidor WebSocket en tiempo real. Incluye autenticación, notificaciones push y sincronización offline.</p>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Flutter</span>
-                                <span class="tech-tag">Firebase</span>
-                                <span class="tech-tag">NodeJS</span>
-                                <span class="tech-tag">WebSocket</span>
-                                <span class="tech-tag">Dart</span>
-                                <span class="tech-tag">REST API</span>
-                            </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-badge" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completado</span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="./img/appmovil.jpg" alt="Aplicación Móvil Flutter">
+                        <div class="project-overlay">
+                            <button class="project-view-btn project-demo-btn" data-project="mobile">
+                                <i class="fas fa-play-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2022 - 2023</span>
+                            <span class="project-category">Aplicación Móvil</span>
+                        </div>
+                        <h3 class="project-title">App Móvil con WebSocket</h3>
+                        <p class="project-description">App móvil con Flutter para UI nativa multiplataforma y backend con Node.js para API REST y servidor WebSocket en tiempo real.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Flutter</span>
+                            <span class="tech-item">Firebase</span>
+                            <span class="tech-item">NodeJS</span>
+                            <span class="tech-item">WebSocket</span>
+                        </div>
+                        <div class="project-actions">
+                            
                         </div>
                     </div>
                 </div>
+
+                <!-- Proyecto 6 - Más proyectos -->
+                
             </div>
         </div>
     </section>
+
+    <!-- Modal para detalles del proyecto -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-badge" id="modalBadge"></div>
+                <h2 id="modalTitle"></h2>
+                <div class="modal-meta">
+                    <span id="modalDate"></span>
+                    <span id="modalCategory"></span>
+                    <span id="modalStatus"></span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-description">
+                    <h4>Descripción del Proyecto</h4>
+                    <p id="modalDescription"></p>
+                    
+                    <h4>Tecnologías Utilizadas</h4>
+                    <div class="modal-tech-stack" id="modalTechStack"></div>
+                    
+                    <h4>Características Principales</h4>
+                    <ul id="modalFeatures"></ul>
+                    
+                    <h4>Desafíos y Soluciones</h4>
+                    <p id="modalChallenges"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-actions" id="modalActions"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- WebSocket Demo Section -->
     <section id="websocket" class="websocket-section">
@@ -1686,6 +2125,240 @@
         
         sections.forEach(section => observer.observe(section));
 
+        // Project Modal Functionality
+        const projectModal = document.getElementById('projectModal');
+        const projectInfoBtns = document.querySelectorAll('.project-info-btn');
+        const modalCloseBtn = document.querySelector('.modal-close');
+        const modalOverlay = document.querySelector('.modal-overlay');
+
+        // Datos detallados de cada proyecto
+        const projectsData = {
+            sudeaseg: {
+                title: "Página Web Sudeaseg",
+                date: "2023 - Presente",
+                category: "Sitio Web Institucional",
+                status: "Activo",
+                badgeColor: "linear-gradient(135deg, #4361ee, #3a56d4)",
+                badgeIcon: "fab fa-wordpress",
+                image: "./img/sudeaseg.png",
+                description: "Desarrollo de una plataforma web modular construida sobre WordPress como CMS base, utilizando PHP para lógica personalizada y extensiones a través de plugins y temas a medida. Interfaz dinámica y reactiva implementada con JavaScript para experiencias de usuario fluidas. Integración de servicios externos y funcionalidades de aplicación mediante API REST.",
+                techStack: ["PHP", "WordPress", "MySQL", "API REST", "JavaScript", "jQuery", "Bootstrap"],
+                features: [
+                    "CMS basado en WordPress con temas y plugins personalizados",
+                    "Interfaz responsive y accesible",
+                    "Integración con servicios externos via API",
+                    "Sistema de gestión de contenido modular",
+                    "Optimización SEO y rendimiento"
+                ],
+                challenges: "El principal desafío fue implementar funcionalidades complejas dentro de las limitaciones de WordPress mientras se mantenía la escalabilidad y el rendimiento. Se resolvió creando una arquitectura modular y utilizando hooks y filtros de WordPress de manera eficiente.",
+                actions: [
+                    { text: "Visitar sitio web", icon: "fas fa-external-link-alt", url: "https://www.sudeaseg.gob.ve", type: "link" }
+                ]
+            },
+            dashboard: {
+                title: "Panel Administrador Shadcn",
+                date: "2023 - 2024",
+                category: "Dashboard Admin",
+                status: "Completado",
+                badgeColor: "linear-gradient(135deg, #7209b7, #9d4edd)",
+                badgeIcon: "fas fa-chart-line",
+                image: "./img/dashboard.png",
+                description: "Interfaz modular construida con componentes Shadcn UI, conectada a Django REST Framework para gestión de datos CRUD. Panel en tiempo real con WebSocket (Node.js/Socket.io) para notificaciones instantáneas y métricas dinámicas. Dashboard con gráficos interactivos (Recharts), tablas paginadas y formularios validados.",
+                techStack: ["Shadcn UI", "React", "Node.js", "Socket.io", "Django REST", "Tailwind CSS", "TypeScript"],
+                features: [
+                    "Panel en tiempo real con WebSocket",
+                    "Gráficos interactivos y métricas dinámicas",
+                    "Sistema de notificaciones instantáneas",
+                    "Operaciones CRUD completas",
+                    "Diseño responsive y accesible"
+                ],
+                challenges: "Sincronización en tiempo real entre múltiples usuarios y mantener la consistencia de datos. Se implementó un sistema de colas y validación en tiempo real usando WebSockets y optimistic updates.",
+                actions: [
+                    
+                ]
+            },
+            tienda: {
+                title: "Tienda Virtual E-commerce",
+                date: "2023",
+                category: "Plataforma E-commerce",
+                status: "Demo Activa",
+                badgeColor: "linear-gradient(135deg, #10b981, #0da271)",
+                badgeIcon: "fas fa-shopping-cart",
+                image: "./img/tienda.png",
+                description: "Plataforma e-commerce full-stack con backend en Django REST Framework y PostgreSQL. Frontend moderno en Next.js con Tailwind CSS para diseño responsive. Sistema completo con catálogo, carrito, checkout y panel de administración. Arquitectura escalable y optimizada para alto rendimiento y SEO.",
+                techStack: ["Django", "Next.js", "Python", "PostgreSQL", "Tailwind CSS", "TypeScript", "REST API"],
+                features: [
+                    "Catálogo de productos con búsqueda y filtros",
+                    "Carrito de compras y checkout",
+                    "Panel de administración completo",
+                    "Pagos en línea integrados",
+                    "Optimización SEO y rendimiento"
+                ],
+                challenges: "Manejar transacciones concurrentes y mantener la consistencia del inventario. Se implementó un sistema de bloqueo optimista y manejo de transacciones en la base de datos.",
+                actions: [
+                    { text: "Visitar demo", icon: "fas fa-external-link-alt", url: "https://tienda-nextjs-cris.vercel.app/", type: "link" },
+                    
+                ]
+            },
+            facial: {
+                title: "Reconocimiento Facial para Perros",
+                date: "2022 - 2023",
+                category: "Inteligencia Artificial",
+                status: "Completado",
+                badgeColor: "linear-gradient(135deg, #f59e0b, #d97706)",
+                badgeIcon: "fas fa-robot",
+                image: "./img/reconocimientofacial.png",
+                description: "Sistema de reconocimiento facial de perros para control de acceso y autenticación biométrica. Implementado con Python, OpenCV y TensorFlow para detección y reconocimiento de rostros de perros. Incluye interfaz web para administración y reportes, con capacidad de procesamiento en tiempo real.",
+                techStack: ["Python", "OpenCV", "TensorFlow", "Flask", "Machine Learning", "Computer Vision", "React"],
+                features: [
+                    "Detección y reconocimiento facial canino",
+                    "Interfaz web para administración",
+                    "Reportes y estadísticas",
+                    "Procesamiento en tiempo real",
+                    "Base de datos de perfiles"
+                ],
+                challenges: "Crear un modelo de reconocimiento preciso para diferentes razas de perros con variaciones en pelaje y características faciales. Se entrenó un modelo personalizado con transfer learning y aumentación de datos.",
+                actions: [
+                    { text: "Ver sitio", icon: "fas fa-file-alt", url: "https://www.sudeaseg.gob.ve/descargas/PerroFacial/", type: "link" },
+                   
+                ]
+            },
+            mobile: {
+                title: "App Móvil con WebSocket",
+                date: "2022 - 2023",
+                category: "Aplicación Móvil",
+                status: "Completado",
+                badgeColor: "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+                badgeIcon: "fas fa-mobile-alt",
+                image: "./img/appmovil.jpg",
+                description: "Desarrollo de una app móvil con arquitectura de integración híbrida. Frontend en Dart/Flutter para UI nativa multiplataforma y gestión de conexiones WebSocket. Backend con Node.js para API REST y servidor WebSocket en tiempo real. Incluye autenticación, notificaciones push y sincronización offline.",
+                techStack: ["Flutter", "Dart", "Node.js", "WebSocket", "Firebase", "REST API", "MongoDB"],
+                features: [
+                    "UI nativa multiplataforma",
+                    "Comunicación en tiempo real con WebSocket",
+                    "Sincronización offline",
+                    "Notificaciones push",
+                    "Autenticación segura"
+                ],
+                challenges: "Mantener la sincronización de datos entre dispositivos y manejar conexiones WebSocket en ambientes móviles con conexiones inestables. Se implementó un sistema de colas y reconexión automática.",
+                actions: [
+                    { text: "Ver código", icon: "fas fa-code", type: "code" },
+                    { text: "Demo de funcionalidad", icon: "fas fa-play-circle", type: "demo" }
+                ]
+            }
+        };
+
+        // Abrir modal
+        projectInfoBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const projectId = btn.dataset.project;
+                openProjectModal(projectId);
+            });
+        });
+
+        // Cerrar modal
+        modalCloseBtn.addEventListener('click', closeProjectModal);
+        modalOverlay.addEventListener('click', closeProjectModal);
+
+        // Cerrar con Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+                closeProjectModal();
+            }
+        });
+
+        function openProjectModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+            
+            // Actualizar contenido del modal
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalDate').textContent = project.date;
+            document.getElementById('modalCategory').textContent = project.category;
+            document.getElementById('modalStatus').textContent = project.status;
+            
+            // Badge
+            const badge = document.getElementById('modalBadge');
+            badge.style.background = project.badgeColor;
+            badge.innerHTML = `<i class="${project.badgeIcon}"></i>`;
+            
+            // Imagen
+            document.getElementById('modalImage').src = project.image;
+            document.getElementById('modalImage').alt = project.title;
+            
+            // Descripción
+            document.getElementById('modalDescription').textContent = project.description;
+            
+            // Tech stack
+            const techStackContainer = document.getElementById('modalTechStack');
+            techStackContainer.innerHTML = '';
+            project.techStack.forEach(tech => {
+                const techItem = document.createElement('span');
+                techItem.className = 'tech-item';
+                techItem.textContent = tech;
+                techStackContainer.appendChild(techItem);
+            });
+            
+            // Features
+            const featuresList = document.getElementById('modalFeatures');
+            featuresList.innerHTML = '';
+            project.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+            
+            // Challenges
+            document.getElementById('modalChallenges').textContent = project.challenges;
+            
+            // Actions
+            const actionsContainer = document.getElementById('modalActions');
+            actionsContainer.innerHTML = '';
+            project.actions.forEach(action => {
+                const actionElement = document.createElement(action.type === 'link' ? 'a' : 'button');
+                
+                if (action.type === 'link') {
+                    actionElement.href = action.url;
+                    actionElement.target = '_blank';
+                    actionElement.className = 'btn btn-primary';
+                } else {
+                    actionElement.className = 'btn btn-outline';
+                    actionElement.addEventListener('click', () => {
+                        handleProjectAction(projectId, action.type);
+                    });
+                }
+                
+                actionElement.innerHTML = `<i class="${action.icon}"></i> ${action.text}`;
+                actionsContainer.appendChild(actionElement);
+            });
+            
+            // Mostrar modal
+            projectModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleProjectAction(projectId, actionType) {
+            switch (actionType) {
+                case 'code':
+                    alert(`Código fuente del proyecto ${projectId} - Enlace disponible en la versión completa`);
+                    break;
+                case 'demo':
+                    alert(`Demo del proyecto ${projectId} - Disponible en la versión completa`);
+                    break;
+                case 'github':
+                    alert(`Repositorio GitHub del proyecto ${projectId} - Enlace disponible en la versión completa`);
+                    break;
+                case 'article':
+                    alert(`Artículo técnico del proyecto ${projectId} - Disponible en la versión completa`);
+                    break;
+            }
+        }
+
         // WebSocket Chat Application
         class WebSocketChat {
             constructor() {
@@ -1958,92 +2631,86 @@
         });
 
         // ============================================
-// NOTIFICACIÓN AUTOMÁTICA DE VISITAS
-// ============================================
+        // NOTIFICACIÓN AUTOMÁTICA DE VISITAS
+        // ============================================
 
-(function() {
-    // Solo ejecutar en producción (no en localhost para evitar spam)
-    const isLocalhost = window.location.hostname === 'localhost' || 
-                        window.location.hostname === '127.0.0.1';
-    
-    // Solo enviar una notificación por sesión
-    //const alreadyNotified = sessionStorage.getItem('portfolioVisitNotified');
-    
-    if (!isLocalhost) {
-        // Esperar 2 segundos para no bloquear la carga de la página
-        setTimeout(() => {
-            // Recolectar información del visitante
-            const visitorData = {
-                pageUrl: window.location.href,
-                userAgent: navigator.userAgent,
-                language: navigator.language,
-                platform: navigator.platform,
-                referrer: document.referrer || 'Acceso directo',
-                screenSize: `${window.screen.width}x${window.screen.height}`,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                cookiesEnabled: navigator.cookieEnabled,
-                online: navigator.onLine,
-                timestamp: new Date().toISOString(),
-                pageTitle: document.title
-            };
+        (function() {
+            // Solo ejecutar en producción (no en localhost para evitar spam)
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                                window.location.hostname === '127.0.0.1';
+            
+            // Solo enviar una notificación por sesión
+            //const alreadyNotified = sessionStorage.getItem('portfolioVisitNotified');
+            
+            if (!isLocalhost) {
+                // Esperar 2 segundos para no bloquear la carga de la página
+                setTimeout(() => {
+                    // Recolectar información del visitante
+                    const visitorData = {
+                        pageUrl: window.location.href,
+                        userAgent: navigator.userAgent,
+                        language: navigator.language,
+                        platform: navigator.platform,
+                        referrer: document.referrer || 'Acceso directo',
+                        screenSize: `${window.screen.width}x${window.screen.height}`,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        cookiesEnabled: navigator.cookieEnabled,
+                        online: navigator.onLine,
+                        timestamp: new Date().toISOString(),
+                        pageTitle: document.title
+                    };
 
-            // URL de la API (relativa para producción, local para desarrollo)
-            const apiUrl = isLocalhost 
-                ? 'http://localhost:3000/api/notify-visit'
-                : '/api/notify-visit';
+                    // URL de la API (relativa para producción, local para desarrollo)
+                    const apiUrl = isLocalhost 
+                        ? 'http://localhost:3000/api/notify-visit'
+                        : '/api/notify-visit';
 
-            // Enviar datos de forma asíncrona y silenciosa
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(visitorData),
-                // Timeout de 3 segundos (no bloquear si hay error)
-                signal: AbortSignal.timeout(3000)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    console.log('Perfil Cargado');
-                    // Marcar como notificado para esta sesión
-                    //sessionStorage.setItem('portfolioVisitNotified', 'true');
-                    
-                    // Opcional: enviar también a analytics
-                    if ('ga' in window) {
-                        ga('send', 'event', 'Visit', 'Notification Sent');
-                    }
-                }
-            })
-            .catch(error => {
-                // Error silencioso - no afecta la experiencia del usuario
-                console.log('Perfil Erróneo');
-                
-                // Intentar con método alternativo si el primero falla
-                if (!isLocalhost) {
-                    setTimeout(() => {
-                        // Método alternativo simple
-                        const img = new Image();
-                        img.src = `https://api.countapi.xyz/hit/portfolio-cristian-aguilera/visit?callback=${Date.now()}`;
-                    }, 1000);
-                }
-            });
-        }, 2000); // Esperar 2 segundos antes de enviar
-    } else if (isLocalhost) {
-        console.log('🛠️ Modo desarrollo: Notificación de visita desactivada');
-    }
-})();
-
-        
+                    // Enviar datos de forma asíncrona y silenciosa
+                    fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(visitorData),
+                        // Timeout de 3 segundos (no bloquear si hay error)
+                        signal: AbortSignal.timeout(3000)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            console.log('Perfil Cargado');
+                            // Marcar como notificado para esta sesión
+                            //sessionStorage.setItem('portfolioVisitNotified', 'true');
+                            
+                            // Opcional: enviar también a analytics
+                            if ('ga' in window) {
+                                ga('send', 'event', 'Visit', 'Notification Sent');
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        // Error silencioso - no afecta la experiencia del usuario
+                        console.log('Perfil Erróneo');
+                        
+                        // Intentar con método alternativo si el primero falla
+                        if (!isLocalhost) {
+                            setTimeout(() => {
+                                // Método alternativo simple
+                                const img = new Image();
+                                img.src = `https://api.countapi.xyz/hit/portfolio-cristian-aguilera/visit?callback=${Date.now()}`;
+                            }, 1000);
+                        }
+                    });
+                }, 2000); // Esperar 2 segundos antes de enviar
+            } else if (isLocalhost) {
+                console.log('🛠️ Modo desarrollo: Notificación de visita desactivada');
+            }
+        })();
     </script>
 </body>
-
-
 </html>
-
-
