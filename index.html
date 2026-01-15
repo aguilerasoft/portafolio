@@ -22,14 +22,14 @@
             --primary-dark: #3a56d4;
             --primary-light: #4895ef;
             --primary-ultra-light: #e7f1ff;
-            --secondary: #1e293b;
+            --secondary: #000000;
             --secondary-light: #334155;
             --accent: #7209b7;
             --accent-light: #9d4edd;
             
             /* Colores neutros */
             --text-main: #2d3748;
-            --text-light: #64748b;
+            --text-light: #141414;
             --text-lighter: #94a3b8;
             --bg-light: #f8fafc;
             --bg-white: #ffffff;
@@ -69,6 +69,68 @@
             --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* Dark Mode Configuration */
+        body.dark-mode {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-ultra-light: rgba(99, 102, 241, 0.15);
+            --secondary: #f8fafc;
+            --secondary-light: #e2e8f0;
+            --text-main: #f1f5f9;
+            --text-light: #cbd5e1;
+            --text-lighter: #94a3b8;
+            --bg-light: #0f172a;
+            --bg-white: #1e293b;
+            --border-light: #334155;
+            --border-medium: #475569;
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+            --shadow-primary: 0 10px 25px -5px rgba(99, 102, 241, 0.3);
+            --shadow-hover: 0 20px 40px -10px rgba(99, 102, 241, 0.4);
+        }
+
+        body.dark-mode header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.8);
+        }
+
+        body.dark-mode .mobile-nav {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        body.dark-mode .mobile-nav-close {
+            background: var(--bg-white);
+            color: var(--text-main);
+        }
+
+        body.dark-mode .project-more {
+            background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+        }
+        
+        body.dark-mode .message.received {
+            background: var(--bg-white);
+        }
+        
+        body.dark-mode .tech-tag {
+            color: #1e293b;
+        }
+        
+        body.dark-mode .sidebar-card h3,
+        body.dark-mode .sidebar-card,
+        body.dark-mode .chat-footer,
+        body.dark-mode .chat-input {
+            color: #1e293b;
+        }
+        
+        body.dark-mode .chat-input::placeholder {
+            color: #64748b;
+        }
+        
+        
 
         /* Reset y configuración base */
         * {
@@ -321,6 +383,33 @@
             color: var(--primary);
         }
 
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-ultra-light);
+            color: var(--primary);
+            transform: rotate(15deg);
+        }
+
+        .mobile-theme-toggle {
+            display: none;
+            margin-right: 0.5rem;
+            font-size: 1.4rem;
+        }
+
         /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
@@ -344,20 +433,21 @@
         .mobile-nav {
             position: fixed;
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 999;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 2000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 2rem;
-            transform: translateX(-100%);
+            transform: translateX(100%);
             opacity: 0;
-            transition: all var(--transition-base);
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             padding: 2rem;
         }
 
@@ -366,48 +456,106 @@
             opacity: 1;
         }
 
-        .mobile-nav a {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-main);
-            padding: 1rem 2rem;
-            width: 100%;
-            text-align: center;
-            border-radius: var(--radius-md);
-            transition: all var(--transition-fast);
+        .mobile-nav-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-logo span {
+            color: var(--primary);
         }
 
-        .mobile-nav a:hover,
-        .mobile-nav a.active {
-            background: var(--primary-ultra-light);
+        .mobile-nav.active .mobile-nav-logo {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.1s;
+        }
+
+        .mobile-nav a {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--secondary);
+            padding: 0.5rem 2rem;
+            width: auto;
+            text-align: center;
+            border-radius: var(--radius-full);
+            transition: all 0.3s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-nav.active a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-nav.active a:nth-of-type(1) { transition-delay: 0.2s; }
+        .mobile-nav.active a:nth-of-type(2) { transition-delay: 0.3s; }
+        .mobile-nav.active a:nth-of-type(3) { transition-delay: 0.4s; }
+        .mobile-nav.active a:nth-of-type(4) { transition-delay: 0.5s; }
+        .mobile-nav.active a:nth-of-type(5) { transition-delay: 0.6s; }
+
+        .mobile-nav a:not(.btn-whatsapp):hover,
+        .mobile-nav a:not(.btn-whatsapp).active {
             color: var(--primary);
-            transform: translateY(-2px);
+            transform: scale(1.1);
+            background: transparent;
         }
 
         .mobile-nav .btn-whatsapp {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            padding: 1rem 2rem;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
             width: auto;
+            background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-hover));
+            color: white;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .mobile-nav.active .btn-whatsapp {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.7s;
+        }
+        
+        .mobile-nav .btn-whatsapp:hover {
+            transform: scale(1.05) translateY(0);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, var(--whatsapp-dark), var(--whatsapp));
         }
 
         .mobile-nav-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
+            top: 2rem;
+            right: 2rem;
+            background: white;
             border: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--secondary);
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: var(--radius-sm);
-            transition: all var(--transition-fast);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            z-index: 10;
         }
 
         .mobile-nav-close:hover {
-            background: var(--primary-ultra-light);
-            color: var(--primary);
+            background: var(--danger);
+            color: white;
+            transform: rotate(90deg);
         }
 
         /* Hero Section */
@@ -699,12 +847,12 @@
         .project-title {
             font-size: 1.4rem;
             margin-bottom: 1rem;
-            color: var(--secondary);
+            color: #3f3e3e;
             line-height: 1.3;
         }
 
         .project-description {
-            color: var(--text-light);
+            color: #2b2a2a;
             margin-bottom: 1.5rem;
             line-height: 1.6;
             flex: 1;
@@ -761,7 +909,7 @@
 
         .project-info-btn {
             background: white;
-            color: var(--text-main);
+            color: #302d2d;
             border: 1px solid var(--border-medium);
         }
 
@@ -919,12 +1067,12 @@
 
         .modal-description h4 {
             margin: 1.5rem 0 0.75rem;
-            color: var(--secondary);
+            color: #2b2a2a;
             font-size: 1.1rem;
         }
 
         .modal-description p, .modal-description ul {
-            color: var(--text-light);
+            color: #3d3c3c;
             line-height: 1.6;
         }
 
@@ -985,7 +1133,7 @@
         }
 
         .chat-header {
-            background: linear-gradient(135deg, var(--secondary), #1e293b);
+            background: linear-gradient(135deg, #26517b, #1e293b);
             color: white;
             padding: 1.5rem;
             display: flex;
@@ -994,7 +1142,7 @@
         }
 
         .status-dot {
-            width: 10px;
+            width: 10px;    background: linear-gradient(135deg, #172635, #1e293b);
             height: 10px;
             background: var(--danger);
             border-radius: 50%;
@@ -1136,7 +1284,7 @@
         }
 
         .stack-card {
-            background: linear-gradient(135deg, var(--secondary), #1e293b);
+            background: linear-gradient(135deg, #172635, #1e293b);
             color: white;
             padding: 2rem;
             border-radius: var(--radius-lg);
@@ -1337,6 +1485,10 @@
                 display: none;
             }
             
+            .mobile-theme-toggle {
+                display: flex;
+            }
+            
             .mobile-menu-btn {
                 display: block;
             }
@@ -1509,10 +1661,7 @@
             }
         }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9135789545695636"
-     crossorigin="anonymous"></script>
-
-    <script src="https://pl28439308.effectivegatecpm.com/a8/48/ef/a848ef2224791c429b30b1de6b8ae252.js"></script>
+   
 </head>
     
 
@@ -1529,8 +1678,15 @@
                 <a href="#projects">Proyectos</a>
                 <a href="#websocket">Demo WebSocket</a>
                 <a href="#contact">Contacto</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
                 
             </nav>
+            
+            <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon"></i>
+            </button>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -1544,34 +1700,30 @@
             <i class="fas fa-times"></i>
         </button>
         
+        <div class="mobile-nav-logo">
+            Cristian <span>Aguilera</span>
+        </div>
+        
         <a href="#about" class="active">Inicio</a>
         <a href="#projects">Proyectos</a>
         <a href="#websocket">Demo WebSocket</a>
         <a href="#contact">Contacto</a>
         
+        <a href="https://wa.me/584241222517" target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Contactar
+        </a>
     </nav>
 
     <!-- Hero Section -->
     <section id="about" class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
-                <span class="tech-tag" style="background: var(--primary-ultra-light); color: var(--primary); border-color: var(--primary);">
-                    <i class="fas fa-rocket"></i> Desarrollador FullStack
-                </span>
                 <h1>Hola, Soy Cristian Aguilera</h1>
                 <p class="hero-subtitle">
                     Profesional especializado en el diseño e implementación de soluciones escalables para startups y
                     empresas del sector financiero. Experiencia demostrada en liderazgo técnico y arquitectura de
                     sistemas complejos.
                 </p>
-                <div class="btn-group">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Contáctame
-                    </a>
-                    <a href="#projects" class="btn btn-outline">
-                        <i class="fas fa-briefcase"></i> Ver Proyectos
-                    </a>
-                </div>
                 <div class="tech-tags">
                     <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
                     <span class="tech-tag"><i class="fab fa-react"></i> NextJS</span>
@@ -1604,14 +1756,7 @@
             <div class="projects-grid">
                 <!-- Proyecto 1 - Sudeaseg -->
                 <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge" style="background: linear-gradient(135deg, #4361ee, #3a56d4);">
-                            <i class="fab fa-wordpress"></i>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge active">Activo</span>
-                        </div>
-                    </div>
+                   
                     <div class="project-image">
                         <img src="./img/sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental">
                         <div class="project-overlay">
@@ -1646,14 +1791,7 @@
 
                 <!-- Proyecto 2 - Panel Administrador -->
                 <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge" style="background: linear-gradient(135deg, #7209b7, #9d4edd);">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge completed">Completado</span>
-                        </div>
-                    </div>
+                   
                     <div class="project-image">
                         <img src="./img/dashboard.png" alt="Dashboard Administrador Shadcn">
                         <div class="project-overlay">
@@ -1686,14 +1824,7 @@
 
                 <!-- Proyecto 3 - Tienda E-commerce -->
                 <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge" style="background: linear-gradient(135deg, #10b981, #0da271);">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge active">Demo Activa</span>
-                        </div>
-                    </div>
+                   
                     <div class="project-image">
                         <img src="./img/tienda.png" alt="Tienda Virtual E-commerce Moderna">
                         <div class="project-overlay">
@@ -1728,14 +1859,7 @@
 
                 <!-- Proyecto 4 - Reconocimiento Facial -->
                 <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge completed">Completado</span>
-                        </div>
-                    </div>
+                   
                     <div class="project-image">
                         <img src="./img/reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros">
                         <div class="project-overlay">
@@ -1770,14 +1894,7 @@
 
                 <!-- Proyecto 5 - App Móvil -->
                 <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-badge completed">Completado</span>
-                        </div>
-                    </div>
+                   
                     <div class="project-image">
                         <img src="./img/appmovil.jpg" alt="Aplicación Móvil Flutter">
                         <div class="project-overlay">
@@ -1819,7 +1936,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-header">
-                <div class="modal-badge" id="modalBadge"></div>
+                
                 <h2 id="modalTitle"></h2>
                 <div class="modal-meta">
                     <span id="modalDate"></span>
@@ -1862,18 +1979,22 @@
             <div class="demo-layout">
                 <aside>
                     <div class="sidebar-card">
-                        <h3 style="margin-bottom: 1rem; color: var(--secondary);">Usuarios Conectados</h3>
+                        
+                        <h3 style="margin-bottom: 1rem;">Usuarios Conectados</h3>
                         <div id="usersList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                             <span style="color: var(--text-light); font-size: 0.9rem;">Esperando conexión...</span>
+                            <span style="font-size: 0.9rem;">Esperando conexión...</span>
                         </div>
                     </div>
 
                     <div class="sidebar-card">
-                        <h3 style="margin-bottom: 1rem; color: var(--secondary);">Protocolo JSON</h3>
+                        
                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-light);">
-                            <div style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">message:</strong> Chat text</div>
-                            <div style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">typing:</strong> Boolean</div>
-                            <div><strong style="color: var(--primary);">users_list:</strong> Array</div>
+                        <h3 style="margin-bottom: 1rem;">Protocolo JSON</h3>
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+                            <div style="margin-bottom: 0.5rem; color: #000000;"><strong style="color: var(--primary);">message:</strong> Chat text</div>
+                            <div style="margin-bottom: 0.5rem; color: #000000;"><strong style="color: var(--primary);">typing:</strong> Boolean</div>
+                            <div style="color: #000000;"><strong style="color: var(--primary);">users_list:</strong> Array</div>
                         </div>
                     </div>
                 </aside>
@@ -1993,9 +2114,7 @@
 
             <footer>
                 <p>&copy; 2026 Cristian Aguilera. Todos los derechos reservados.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.85rem;">
-                    Desarrollado con <i class="fas fa-heart" style="color: #ef4444;"></i> usando HTML, CSS y JavaScript
-                </p>
+
             </footer>
         </div>
     </section>
@@ -2017,6 +2136,34 @@
     </div>
 
     <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const mobileThemeToggleBtn = document.getElementById('mobileThemeToggle');
+        const body = document.body;
+        
+        // Check local storage or system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            updateIcons(true);
+        }
+        
+        function updateIcons(isDark) {
+            const iconClass = isDark ? 'fa-sun' : 'fa-moon';
+            if(themeToggleBtn) themeToggleBtn.innerHTML = `<i class="fas ${iconClass}"></i>`;
+            if(mobileThemeToggleBtn) mobileThemeToggleBtn.innerHTML = `<i class="fas ${iconClass}"></i>`;
+        }
+        
+        function toggleTheme() {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateIcons(isDark);
+        }
+        
+        if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if(mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
         // Mobile Navigation
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
@@ -2279,8 +2426,8 @@
             
             // Badge
             const badge = document.getElementById('modalBadge');
-            badge.style.background = project.badgeColor;
-            badge.innerHTML = `<i class="${project.badgeIcon}"></i>`;
+            
+            
             
             // Imagen
             document.getElementById('modalImage').src = project.image;
