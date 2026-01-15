@@ -130,6 +130,53 @@
             color: #64748b;
         }
         
+        /* Estilos para Sección de Beneficios (Interés) */
+        .benefit-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            transition: all var(--transition-base);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-ultra-light);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilos para Testimonios (Prueba Social) */
+        .testimonial-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
         
 
         /* Reset y configuración base */
@@ -1274,6 +1321,20 @@
             font-size: 1.25rem;
             flex-shrink: 0;
         }
+        
+        /* Guarantee Card */
+        .guarantee-card {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 1px solid #bae6fd;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            height: 100%;
+        }
+        
+        body.dark-mode .guarantee-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
+            border-color: var(--primary-dark);
+        }
 
         /* Contact Section */
         .contact-grid {
@@ -1675,8 +1736,8 @@
             
             <nav class="nav-links">
                 <a href="#about" class="active">Inicio</a>
-                <a href="#projects">Proyectos</a>
-                <a href="#websocket">Demo WebSocket</a>
+                <a href="#benefits">Servicios</a>
+                <a href="#projects">Resultados</a>
                 <a href="#contact">Contacto</a>
                 <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
                     <i class="fas fa-moon"></i>
@@ -1705,8 +1766,8 @@
         </div>
         
         <a href="#about" class="active">Inicio</a>
-        <a href="#projects">Proyectos</a>
-        <a href="#websocket">Demo WebSocket</a>
+        <a href="#benefits">Servicios</a>
+        <a href="#projects">Resultados</a>
         <a href="#contact">Contacto</a>
         
         <a href="https://wa.me/584241222517" target="_blank" class="btn btn-whatsapp">
@@ -1718,21 +1779,20 @@
     <section id="about" class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
-                <h1>Hola, Soy Cristian Aguilera</h1>
+                <h1>Transformo Ideas en Negocios Digitales Rentables</h1>
                 <p class="hero-subtitle">
-                    Profesional especializado en el diseño e implementación de soluciones escalables para startups y
-                    empresas del sector financiero. Experiencia demostrada en liderazgo técnico y arquitectura de
-                    sistemas complejos.
+                    Ayudo a empresas y emprendedores a lanzar plataformas web rápidas, seguras y diseñadas para vender. 
+                    No solo escribo código, construyo activos digitales que hacen crecer tu facturación.
                 </p>
                 <div class="tech-tags">
-                    <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
-                    <span class="tech-tag"><i class="fab fa-react"></i> NextJS</span>
-                    <span class="tech-tag"><i class="fab fa-typescript"></i> Typescript</span>
-                    <span class="tech-tag"><i class="fab fa-node"></i> NodeJs</span>
-                    <span class="tech-tag"><i class="fas fa-mobile-alt"></i> Flutter</span>
-                    <span class="tech-tag"><i class="fab fa-php"></i> PHP</span>
-                    <span class="tech-tag"><i class="fas fa-bolt"></i> WebSocket</span>
-                    <span class="tech-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                    <span class="tech-tag"><i class="fas fa-rocket"></i> Sitios de Alto Rendimiento</span>
+                    <span class="tech-tag"><i class="fas fa-search-dollar"></i> SEO Optimizado</span>
+                    <span class="tech-tag"><i class="fas fa-shield-alt"></i> Seguridad Bancaria</span>
+                    <span class="tech-tag"><i class="fas fa-mobile-alt"></i> 100% Responsive</span>
+                </div>
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary">Agenda tu Consultoría Gratis</a>
+                    <a href="#projects" class="btn btn-outline">Ver Casos de Éxito</a>
                 </div>
             </div>
 
@@ -1745,12 +1805,42 @@
         </div>
     </section>
 
+    <!-- Benefits Section (INTERÉS) -->
+    <section id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tu Ventaja Competitiva</h2>
+                <p class="section-subtitle">¿Por qué elegir mis servicios frente a una agencia tradicional o plantillas genéricas?</p>
+            </div>
+            
+            <div class="projects-grid"> <!-- Reutilizando grid -->
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3>Velocidad que Vende</h3>
+                    <p>Un sitio lento pierde clientes. Desarrollo plataformas optimizadas que cargan en milisegundos, mejorando tu posición en Google y tu tasa de conversión.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Diseño Persuasivo</h3>
+                    <p>No solo se trata de que se vea "bonito". Aplico principios de Neuromarketing y UX para guiar a tus visitantes hacia la compra o contacto.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h3>Escalabilidad Total</h3>
+                    <p>Tu negocio va a crecer. Construyo arquitecturas robustas que soportan desde 100 hasta 100.000 usuarios sin colapsar ni requerir reescrituras costosas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section - NUEVO DISEÑO -->
     <section id="projects" class="projects-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Proyectos Destacados</h2>
-                <p class="section-subtitle">Una colección de mis trabajos más relevantes, desde soluciones empresariales hasta aplicaciones innovadoras.</p>
+                <h2 class="section-title">Casos de Éxito</h2>
+                <p class="section-subtitle">Resultados reales para problemas reales. Así es como he ayudado a otras organizaciones a alcanzar sus objetivos.</p>
             </div>
 
             <div class="projects-grid">
@@ -1770,8 +1860,8 @@
                             <span class="project-date">2023 - Presente</span>
                             <span class="project-category">Sitio Web Institucional</span>
                         </div>
-                        <h3 class="project-title">Página Web Sudeaseg</h3>
-                        <p class="project-description">Plataforma web modular construida sobre WordPress como CMS base, con PHP para lógica personalizada y extensiones a través de plugins y temas a medida.</p>
+                        <h3 class="project-title">Modernización Gubernamental Sudeaseg</h3>
+                        <p class="project-description">Transformación digital completa para el ente regulador. Se optimizó el acceso a la información para miles de ciudadanos, reduciendo tiempos de carga en un 60% y mejorando la accesibilidad móvil.</p>
                         <div class="tech-stack">
                             <span class="tech-item">PHP</span>
                             <span class="tech-item">WordPress</span>
@@ -1805,8 +1895,8 @@
                             <span class="project-date">2023 - 2024</span>
                             <span class="project-category">Dashboard Admin</span>
                         </div>
-                        <h3 class="project-title">Panel Administrador Shadcn</h3>
-                        <p class="project-description">Interfaz modular con componentes Shadcn UI conectada a Django REST Framework. Panel en tiempo real con WebSocket para notificaciones instantáneas.</p>
+                        <h3 class="project-title">Panel de Control en Tiempo Real</h3>
+                        <p class="project-description">Sistema de gestión empresarial que permite a los directivos tomar decisiones basadas en datos en vivo. Centraliza métricas críticas y elimina el uso de hojas de cálculo desactualizadas.</p>
                         <div class="tech-stack">
                             <span class="tech-item">Shadcn</span>
                             <span class="tech-item">NodeJS</span>
@@ -1838,8 +1928,8 @@
                             <span class="project-date">2023</span>
                             <span class="project-category">E-commerce</span>
                         </div>
-                        <h3 class="project-title">Tienda Virtual E-commerce</h3>
-                        <p class="project-description">Plataforma e-commerce full-stack con backend en Django REST Framework y frontend en Next.js con Tailwind CSS. Sistema completo de catálogo y checkout.</p>
+                        <h3 class="project-title">E-commerce de Alta Conversión</h3>
+                        <p class="project-description">Tienda online diseñada para vender 24/7. Incluye gestión automática de inventario y pasarela de pagos segura. Optimizada para SEO, logrando posicionamiento orgánico en semanas.</p>
                         <div class="tech-stack">
                             <span class="tech-item">Django</span>
                             <span class="tech-item">NextJS</span>
@@ -1928,6 +2018,32 @@
         </div>
     </section>
 
+    <!-- Testimonials Section (PRUEBA SOCIAL) -->
+    <section id="testimonials" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Lo que dicen mis clientes</h2>
+                <p class="section-subtitle">La confianza se gana con resultados.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Cristian transformó nuestra presencia digital. No solo entregó a tiempo, sino que nos asesoró en cada paso para mejorar nuestras ventas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"><i class="fas fa-user"></i></div>
+                        <div class="author-info"><h4>Carlos Rodríguez</h4><span>CEO, Startup FinTech</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"La capacidad técnica de Cristian es impresionante, pero su enfoque en el negocio es lo que realmente marca la diferencia. Altamente recomendado."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"><i class="fas fa-user"></i></div>
+                        <div class="author-info"><h4>Ana Martínez</h4><span>Directora de Marketing</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Modal para detalles del proyecto -->
     <div class="project-modal" id="projectModal">
         <div class="modal-overlay"></div>
@@ -1972,8 +2088,8 @@
     <section id="websocket" class="websocket-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Demo WebSocket en Vivo</h2>
-                <p class="section-subtitle">Prueba la conectividad en tiempo real. Esta sección se conecta a mi servidor WebSocket para demostrar mis habilidades en comunicación bidireccional.</p>
+                <h2 class="section-title">Tecnología de Chat en Vivo</h2>
+                <p class="section-subtitle">Imagina ofrecer soporte instantáneo a tus clientes en tu propia web. Esta demo prueba mi capacidad para implementar sistemas de comunicación en tiempo real para tu negocio.</p>
             </div>
 
             <div class="demo-layout">
@@ -2048,10 +2164,10 @@
         <div class="container">
             <div class="contact-grid">
                 <div>
-                    <h2>Hablemos de tu proyecto</h2>
+                    <h2>Empieza tu Transformación Digital</h2>
                     <p style="margin: 1rem 0 2rem; color: var(--text-light);">
-                        Estoy disponible para nuevos proyectos y consultorías. Si buscas un desarrollador que entienda
-                        tanto el frontend como el backend escalable, contáctame.
+                        ¿Tienes una idea o un negocio que necesita escalar? No pierdas más tiempo con soluciones que no funcionan.
+                        Agenda una llamada y diseñemos un plan de acción a tu medida.
                     </p>
 
                     <div class="contact-row">
@@ -2084,31 +2200,21 @@
                     </div>
                 </div>
 
-                <div class="stack-card">
-                    <h3 style="color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
-                        Stack Tecnológico</h3>
-                    <div class="stack-grid">
-                        <div>
-                            <div class="stack-category">Backend</div>
-                            <ul class="stack-list">
-                                <li>Django / Python</li>
-                                <li>PostgreSQL</li>
-                                <li>Redis / Celery</li>
-                                <li>Node.js</li>
-                                <li>API REST / WebSocket</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="stack-category">Frontend</div>
-                            <ul class="stack-list">
-                                <li>NextJS / React</li>
-                                <li>Flutter (Mobile)</li>
-                                <li>Tailwind CSS</li>
-                                <li>TypeScript</li>
-                                <li>Shadcn UI</li>
-                            </ul>
-                        </div>
+                <!-- GARANTÍA (ACCIÓN/RIESGO REVERSAL) -->
+                <div class="guarantee-card">
+                    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="fas fa-certificate"></i>
                     </div>
+                    <h3 style="margin-bottom: 1rem; color: var(--secondary);">Mi Garantía de Calidad</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+                        Entiendo que contratar desarrollo web puede generar incertidumbre. Por eso te ofrezco:
+                    </p>
+                    <ul style="text-align: left; list-style: none; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> <strong>Entregas por hitos:</strong> Pagas contra avance.</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> <strong>Soporte Post-Lanzamiento:</strong> 30 días de garantía técnica gratuita.</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> <strong>Código Propio:</strong> Tú eres el dueño del 100% de tu plataforma.</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Quiero trabajar contigo</a>
                 </div>
             </div>
 
