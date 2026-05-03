@@ -37,16 +37,70 @@
 
         #game-container {
             position: relative;
-            width: 800px;
-            height: 600px;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 4 / 3;
             background: #0a0e17;
             border: 4px solid var(--gold);
             box-shadow: 0 0 20px rgba(245, 200, 66, 0.3);
+            overflow: hidden;
             image-rendering: pixelated;
         }
 
         canvas {
             display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Mobile Controls */
+        .mobile-controls {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            background: #000;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .touch-btn {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            user-select: none;
+            touch-action: manipulation;
+            box-shadow: 0 4px 0 var(--gold);
+            transition: all 0.1s;
+        }
+
+        .touch-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 var(--gold);
+            background: var(--gold);
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            body, html { justify-content: flex-start; padding-top: 20px; }
+            .mobile-controls { display: flex; }
+            .title { font-size: 16px; margin-bottom: 10px; }
+            .subtitle { font-size: 8px; margin-bottom: 20px; }
+            .ui-item { font-size: 8px; }
+            #game-container { border: none; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); aspect-ratio: 1/1; }
         }
 
         .ui-overlay {
@@ -170,6 +224,15 @@
         <canvas id="gameCanvas" width="800" height="600"></canvas>
     </div>
 
+    <div class="mobile-controls">
+        <div class="control-group">
+            <div class="touch-btn" id="btnLeft">◀</div>
+            <div class="touch-btn" id="btnRight">▶</div>
+        </div>
+        <div class="touch-btn" id="btnShoot"
+            style="width: 100px; height: 70px; font-size: 10px; font-family: var(--pixel); text-align: center;">DISPARAR<br>CÓDIGO</div>
+    </div>
+
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -196,6 +259,18 @@
         const keys = {};
         window.addEventListener('keydown', e => keys[e.code] = true);
         window.addEventListener('keyup', e => keys[e.code] = false);
+        
+        // Touch events
+        const btnLeft = document.getElementById('btnLeft');
+        const btnRight = document.getElementById('btnRight');
+        const btnShoot = document.getElementById('btnShoot');
+
+        btnLeft.ontouchstart = () => keys['ArrowLeft'] = true;
+        btnLeft.ontouchend = () => keys['ArrowLeft'] = false;
+        btnRight.ontouchstart = () => keys['ArrowRight'] = true;
+        btnRight.ontouchend = () => keys['ArrowRight'] = false;
+        btnShoot.ontouchstart = (e) => { e.preventDefault(); shoot(); };
+
         canvas.addEventListener('mousedown', () => shoot());
         window.addEventListener('keydown', e => { if (e.code === 'Space') shoot(); });
 

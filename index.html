@@ -26,6 +26,7 @@
             --secondary-light: #334155;
             --accent: #7209b7;
             --accent-light: #9d4edd;
+            --gold: #FFD700;
 
             /* Colores neutros */
             --text-main: #2d3748;
@@ -88,7 +89,7 @@
             --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0, 0 / 0.5);
             --shadow-primary: 0 10px 25px -5px rgba(99, 102, 241, 0.3);
             --shadow-hover: 0 20px 40px -10px rgba(99, 102, 241, 0.4);
         }
@@ -219,6 +220,14 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 99998;
+        }
+
+        @media (max-width: 768px) {
+            .thanos-overlay {
+                padding: 20px;
+                overflow-y: auto;
+            }
+            .thanos-overlay h2 { font-size: 1.8rem !important; }
         }
 
         /* Estilos para Sección de Beneficios (Interés) */
@@ -2387,15 +2396,43 @@
     </section>
 
     <div class="thanos-overlay" id="thanosOverlay">
-        <h2 style="font-size: 3rem; margin-bottom: 1rem; color: var(--gold); font-family: 'Press Start 2P', cursive;">
+        <h2 class="boom-title" style="font-size: 3rem; margin-bottom: 1rem; color: var(--gold); font-family: 'Press Start 2P', cursive;">
             ¡BOOM!</h2>
-        <p style="font-size: 1.5rem; margin-bottom: 2rem; font-weight: 700;">Todo el desorden ha desaparecido.</p>
-        <p style="font-size: 1.1rem; margin-bottom: 2.5rem; opacity: 0.9; max-width: 600px;">
+        <p class="boom-subtitle" style="font-size: 1.5rem; margin-bottom: 2rem; font-weight: 700;">Todo el desorden ha desaparecido.</p>
+        <p class="boom-text" style="font-size: 1.1rem; margin-bottom: 2.5rem; opacity: 0.9; max-width: 600px;">
             En un mundo de código inestable, solo sobrevive la arquitectura de <strong>Cristian Aguilera</strong>.
             ¿Listo para construir algo que sea realmente inevitable?
         </p>
-        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
-            <button class="btn btn-primary" onclick="location.reload()" style="
+
+        <style>
+            .thanos-overlay {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 40px;
+                box-sizing: border-box;
+            }
+            .boom-actions {
+                display: flex;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 1rem;
+                width: 100%;
+            }
+            @media (max-width: 768px) {
+                .thanos-overlay { padding: 20px; justify-content: flex-start; padding-top: 20vh; }
+                .boom-title { font-size: 2rem !important; }
+                .boom-subtitle { font-size: 1.2rem !important; }
+                .boom-text { font-size: 1rem !important; }
+                .boom-actions { flex-direction: column; align-items: center; gap: 1rem; }
+                .boom-actions .btn, .boom-actions button { width: 100% !important; max-width: 300px; margin: 0 !important; }
+            }
+        </style>
+
+        <div class="boom-actions">
+            <button class="btn btn-primary" id="rebuildBtn" onclick="location.reload()" style="
                 background: linear-gradient(135deg, #f5c842, #ffa500); 
                 color: #000; 
                 padding: 1.2rem 2.5rem; 
