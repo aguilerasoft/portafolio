@@ -26,7 +26,7 @@
             --secondary-light: #334155;
             --accent: #7209b7;
             --accent-light: #9d4edd;
-            
+
             /* Colores neutros */
             --text-main: #2d3748;
             --text-light: #141414;
@@ -35,35 +35,35 @@
             --bg-white: #ffffff;
             --border-light: #e2e8f0;
             --border-medium: #cbd5e1;
-            
+
             /* Colores de estado */
             --success: #10b981;
             --success-dark: #0da271;
             --warning: #f59e0b;
             --danger: #ef4444;
             --info: #3b82f6;
-            
+
             /* Colores específicos */
             --whatsapp: #25D366;
             --whatsapp-dark: #128C7E;
             --whatsapp-hover: #22c55e;
             --linkedin: #0A66C2;
             --github: #333333;
-            
+
             /* Sombras y bordes */
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 20px;
             --radius-xl: 30px;
             --radius-full: 9999px;
-            
+
             --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
             --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
             --shadow-primary: 0 10px 25px -5px rgba(67, 97, 238, 0.25), 0 8px 10px -6px rgba(67, 97, 238, 0.15);
             --shadow-hover: 0 20px 40px -10px rgba(67, 97, 238, 0.3);
-            
+
             /* Transiciones */
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -110,26 +110,117 @@
         body.dark-mode .project-more {
             background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
         }
-        
+
         body.dark-mode .message.received {
             background: var(--bg-white);
         }
-        
+
         body.dark-mode .tech-tag {
             color: #1e293b;
         }
-        
+
         body.dark-mode .sidebar-card h3,
         body.dark-mode .sidebar-card,
         body.dark-mode .chat-footer,
         body.dark-mode .chat-input {
             color: #1e293b;
         }
-        
+
         body.dark-mode .chat-input::placeholder {
             color: #64748b;
         }
-        
+
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(245, 200, 66, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(245, 200, 66, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(245, 200, 66, 0);
+            }
+        }
+
+        .btn-rpg-pulse {
+            animation: pulse-gold 2s infinite;
+        }
+
+        /* Thanos Snap & Kill Button */
+        .btn-kill-pro {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            padding: 0.85rem 2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-kill-pro:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 75, 43, 0.5);
+        }
+
+        .disintegrate {
+            animation: snap 2.5s forwards ease-in;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes snap {
+            0% {
+                transform: scale(1);
+                filter: blur(0);
+                opacity: 1;
+            }
+
+            20% {
+                transform: scale(1.02) translateY(-2px);
+                filter: blur(1px) contrast(1.2);
+            }
+
+            100% {
+                transform: scale(1.1) translateY(-100px) rotate(5deg);
+                filter: blur(20px) opacity(0);
+                mask-image: radial-gradient(circle, transparent 20%, black 100%);
+            }
+        }
+
+        .thanos-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.95) 100%);
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .dust-particle {
+            position: fixed;
+            background: #aaa;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+        }
+
         /* Estilos para Sección de Beneficios (Interés) */
         .benefit-card {
             background: var(--bg-white);
@@ -141,13 +232,13 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .benefit-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary);
         }
-        
+
         .benefit-icon {
             width: 60px;
             height: 60px;
@@ -169,15 +260,15 @@
             border: 1px solid var(--border-light);
             box-shadow: var(--shadow-sm);
         }
-        
+
         .testimonial-quote {
             font-style: italic;
             color: var(--text-main);
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
-        
-        
+
+
 
         /* Reset y configuración base */
         * {
@@ -202,7 +293,10 @@
         }
 
         /* Tipografía */
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             color: var(--secondary);
             font-weight: 700;
             line-height: 1.2;
@@ -512,7 +606,7 @@
             transform: translateY(-20px);
             transition: all 0.3s ease;
         }
-        
+
         .mobile-nav-logo span {
             color: var(--primary);
         }
@@ -541,12 +635,26 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .mobile-nav.active a:nth-of-type(1) { transition-delay: 0.2s; }
-        .mobile-nav.active a:nth-of-type(2) { transition-delay: 0.3s; }
-        .mobile-nav.active a:nth-of-type(3) { transition-delay: 0.4s; }
-        .mobile-nav.active a:nth-of-type(4) { transition-delay: 0.5s; }
-        .mobile-nav.active a:nth-of-type(5) { transition-delay: 0.6s; }
+
+        .mobile-nav.active a:nth-of-type(1) {
+            transition-delay: 0.2s;
+        }
+
+        .mobile-nav.active a:nth-of-type(2) {
+            transition-delay: 0.3s;
+        }
+
+        .mobile-nav.active a:nth-of-type(3) {
+            transition-delay: 0.4s;
+        }
+
+        .mobile-nav.active a:nth-of-type(4) {
+            transition-delay: 0.5s;
+        }
+
+        .mobile-nav.active a:nth-of-type(5) {
+            transition-delay: 0.6s;
+        }
 
         .mobile-nav a:not(.btn-whatsapp):hover,
         .mobile-nav a:not(.btn-whatsapp).active {
@@ -566,13 +674,13 @@
             opacity: 0;
             transform: translateY(20px);
         }
-        
+
         .mobile-nav.active .btn-whatsapp {
             opacity: 1;
             transform: translateY(0);
             transition-delay: 0.7s;
         }
-        
+
         .mobile-nav .btn-whatsapp:hover {
             transform: scale(1.05) translateY(0);
             box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
@@ -690,12 +798,15 @@
                 border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
                 transform: rotate(0deg) scale(1);
             }
+
             33% {
                 border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             }
+
             66% {
                 border-radius: 30% 70% 60% 40% / 50% 60% 30% 60%;
             }
+
             100% {
                 border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
                 transform: rotate(10deg) scale(1.05);
@@ -703,9 +814,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-15px);
             }
@@ -878,7 +992,8 @@
             flex-wrap: wrap;
         }
 
-        .project-date, .project-category {
+        .project-date,
+        .project-category {
             font-size: 0.85rem;
             color: var(--text-light);
             font-weight: 500;
@@ -928,7 +1043,8 @@
             margin-top: auto;
         }
 
-        .project-link, .project-info-btn {
+        .project-link,
+        .project-info-btn {
             flex: 1;
             padding: 0.625rem 1rem;
             border-radius: var(--radius-md);
@@ -1118,7 +1234,8 @@
             font-size: 1.1rem;
         }
 
-        .modal-description p, .modal-description ul {
+        .modal-description p,
+        .modal-description ul {
             color: #3d3c3c;
             line-height: 1.6;
         }
@@ -1189,7 +1306,8 @@
         }
 
         .status-dot {
-            width: 10px;    background: linear-gradient(135deg, #172635, #1e293b);
+            width: 10px;
+            background: linear-gradient(135deg, #172635, #1e293b);
             height: 10px;
             background: var(--danger);
             border-radius: 50%;
@@ -1228,6 +1346,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1321,7 +1440,7 @@
             font-size: 1.25rem;
             flex-shrink: 0;
         }
-        
+
         /* Guarantee Card */
         .guarantee-card {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
@@ -1330,7 +1449,7 @@
             border-radius: var(--radius-lg);
             height: 100%;
         }
-        
+
         body.dark-mode .guarantee-card {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
             border-color: var(--primary-dark);
@@ -1499,61 +1618,62 @@
             h1 {
                 font-size: 2.75rem;
             }
-            
+
             h2 {
                 font-size: 2.25rem;
             }
-            
+
             .hero-grid {
                 gap: 3rem;
             }
-            
+
             .projects-grid {
                 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             }
         }
 
         @media (max-width: 900px) {
+
             .hero-grid,
             .demo-layout,
             .contact-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .hero-grid {
                 text-align: center;
             }
-            
+
             .hero-text {
                 order: 2;
             }
-            
+
             .profile-container {
                 order: 1;
                 justify-content: center;
             }
-            
+
             .btn-group {
                 justify-content: center;
             }
-            
+
             .tech-tags {
                 justify-content: center;
             }
-            
+
             /* Navigation - Mostrar botón móvil */
             .nav-links {
                 display: none;
             }
-            
+
             .mobile-theme-toggle {
                 display: flex;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .modal-body {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -1564,76 +1684,76 @@
             h1 {
                 font-size: 2.25rem;
             }
-            
+
             h2 {
                 font-size: 1.875rem;
             }
-            
+
             h3 {
                 font-size: 1.5rem;
             }
-            
+
             section {
                 padding: 3rem 0;
             }
-            
+
             .hero {
                 padding-top: 8rem;
             }
-            
+
             .profile-img-wrapper {
                 width: 280px;
                 height: 280px;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.125rem;
             }
-            
+
             .btn {
                 padding: 0.75rem 1.5rem;
                 font-size: 0.95rem;
             }
-            
+
             .projects-grid {
                 grid-template-columns: 1fr;
                 max-width: 500px;
                 margin: 2rem auto 0;
             }
-            
+
             .sidebar-card,
             .stack-card,
             .project-content {
                 padding: 1.5rem;
             }
-            
+
             .stack-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            
+
             .modal-content {
                 width: 95%;
                 max-height: 95vh;
             }
-            
+
             /* Botones flotantes más pequeños en tablet */
             .floating-buttons {
                 bottom: 20px;
                 right: 20px;
                 gap: 12px;
             }
-            
+
             .download-cv-btn,
             .whatsapp-float-btn {
                 width: 55px;
                 height: 55px;
             }
-            
+
             .download-cv-btn i {
                 font-size: 1.4rem;
             }
-            
+
             .whatsapp-float-btn i {
                 font-size: 1.6rem;
             }
@@ -1643,78 +1763,78 @@
             .container {
                 padding: 0 1rem;
             }
-            
+
             h1 {
                 font-size: 2rem;
             }
-            
+
             h2 {
                 font-size: 1.75rem;
             }
-            
+
             .profile-img-wrapper {
                 width: 240px;
                 height: 240px;
             }
-            
+
             .tech-tag {
                 padding: 0.4rem 1rem;
                 font-size: 0.8rem;
             }
-            
+
             .project-header {
                 padding: 1rem 1rem 0;
             }
-            
+
             .project-content {
                 padding: 1.25rem;
             }
-            
+
             .project-actions {
                 flex-direction: column;
             }
-            
+
             .chat-card {
                 height: 500px;
             }
-            
+
             .message {
                 max-width: 90%;
                 font-size: 0.9rem;
             }
-            
+
             .modal-header,
             .modal-body,
             .modal-footer {
                 padding: 1.5rem;
             }
-            
+
             /* Botones flotantes más pequeños en móvil */
             .floating-buttons {
                 bottom: 15px;
                 right: 15px;
                 gap: 10px;
             }
-            
+
             .download-cv-btn,
             .whatsapp-float-btn {
                 width: 50px;
                 height: 50px;
             }
-            
+
             .download-cv-btn i {
                 font-size: 1.25rem;
             }
-            
+
             .whatsapp-float-btn i {
                 font-size: 1.5rem;
             }
-            
+
             /* Ocultar tooltips en móvil */
             .floating-btn-tooltip {
                 display: none;
             }
-            
+
             /* Ajustes menú móvil */
             .mobile-nav a {
                 font-size: 1.3rem;
@@ -1722,9 +1842,9 @@
             }
         }
     </style>
-   
+
 </head>
-    
+
 
 <body>
     <!-- Header -->
@@ -1733,7 +1853,7 @@
             <div class="logo">
                 <i class="fas fa-code"></i> Cristian <span>Aguilera</span>
             </div>
-            
+
             <nav class="nav-links">
                 <a href="#about" class="active">Inicio</a>
                 <a href="#benefits">Servicios</a>
@@ -1742,13 +1862,13 @@
                 <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
                     <i class="fas fa-moon"></i>
                 </button>
-                
+
             </nav>
-            
+
             <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="Cambiar tema">
                 <i class="fas fa-moon"></i>
             </button>
-            
+
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -1760,16 +1880,16 @@
         <button class="mobile-nav-close" id="mobileNavClose">
             <i class="fas fa-times"></i>
         </button>
-        
+
         <div class="mobile-nav-logo">
             Cristian <span>Aguilera</span>
         </div>
-        
+
         <a href="#about" class="active">Inicio</a>
         <a href="#benefits">Servicios</a>
         <a href="#projects">Resultados</a>
         <a href="#contact">Contacto</a>
-        
+
         <a href="https://wa.me/584241222517" target="_blank" class="btn btn-whatsapp">
             <i class="fab fa-whatsapp"></i> Contactar
         </a>
@@ -1781,18 +1901,43 @@
             <div class="hero-text">
                 <h1>Transformo Ideas en Negocios Digitales Rentables</h1>
                 <p class="hero-subtitle">
-                    Ayudo a empresas y emprendedores a lanzar plataformas web rápidas, seguras y diseñadas para vender. 
+                    Ayudo a empresas y emprendedores a lanzar plataformas web rápidas, seguras y diseñadas para vender.
                     No solo escribo código, construyo activos digitales que hacen crecer tu facturación.
                 </p>
                 <div class="tech-tags">
                     <span class="tech-tag"><i class="fas fa-rocket"></i> Sitios de Alto Rendimiento</span>
                     <span class="tech-tag"><i class="fas fa-search-dollar"></i> SEO Optimizado</span>
                     <span class="tech-tag"><i class="fas fa-shield-alt"></i> Seguridad Bancaria</span>
+                    <span class="tech-tag"><i class="fas fa-server"></i> Implementación Dokploy</span>
+                    <span class="tech-tag"><i class="fab fa-gitlab"></i> CI/CD GitLab</span>
+                    <span class="tech-tag"><i class="fas fa-user-secret"></i> Kali Linux Expert</span>
                     <span class="tech-tag"><i class="fas fa-mobile-alt"></i> 100% Responsive</span>
                 </div>
                 <div class="btn-group">
                     <a href="#contact" class="btn btn-primary">Agenda tu Consultoría Gratis</a>
                     <a href="#projects" class="btn btn-outline">Ver Casos de Éxito</a>
+                    <a href="javascript:void(0)" onclick="openRpgModal()" class="btn-rpg btn-rpg-pulse" style="
+                        background: linear-gradient(135deg, var(--gold), var(--gold2));
+                        color: #000;
+                        border: none;
+                        padding: 0.85rem 2rem;
+                        border-radius: var(--radius-md);
+                        font-weight: 800;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 12px;
+                        transition: all 0.3s ease;
+                        text-decoration: none;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                    ">
+                        <i class="fas fa-gamepad" style="font-size: 1.4rem;"></i> ¡PROBAR MODO RPG!
+                    </a>
+                    <button class="btn-kill-pro" id="thanosBtn" onclick="initThanosSnap()">
+                        <i class="fas fa-exclamation-triangle"></i> NO APRETAR
+                    </button>
                 </div>
             </div>
 
@@ -1805,31 +1950,47 @@
         </div>
     </section>
 
+    <!-- Modal RPG -->
+    <div id="rpgModal" class="project-modal" style="z-index: 9999;">
+        <div class="modal-content"
+            style="width: 90%; max-width: 900px; height: 80vh; padding: 0; overflow: hidden; background: #000;">
+            <button class="modal-close" onclick="closeRpgModal()"
+                style="top: 10px; right: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; z-index: 100; color: white;">
+                <i class="fas fa-times"></i>
+            </button>
+            <iframe id="rpgFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
     <!-- Benefits Section (INTERÉS) -->
     <section id="benefits">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Tu Ventaja Competitiva</h2>
-                <p class="section-subtitle">¿Por qué elegir mis servicios frente a una agencia tradicional o plantillas genéricas?</p>
+                <p class="section-subtitle">¿Por qué elegir mis servicios frente a una agencia tradicional o plantillas
+                    genéricas?</p>
             </div>
-            
+
             <div class="projects-grid"> <!-- Reutilizando grid -->
                 <div class="benefit-card">
                     <div class="benefit-icon"><i class="fas fa-tachometer-alt"></i></div>
                     <h3>Velocidad que Vende</h3>
-                    <p>Un sitio lento pierde clientes. Desarrollo plataformas optimizadas que cargan en milisegundos, mejorando tu posición en Google y tu tasa de conversión.</p>
+                    <p>Un sitio lento pierde clientes. Desarrollo plataformas optimizadas que cargan en milisegundos,
+                        mejorando tu posición en Google y tu tasa de conversión.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon"><i class="fas fa-paint-brush"></i></div>
                     <h3>Diseño Persuasivo</h3>
-                    <p>No solo se trata de que se vea "bonito". Aplico principios de Neuromarketing y UX para guiar a tus visitantes hacia la compra o contacto.</p>
+                    <p>No solo se trata de que se vea "bonito". Aplico principios de Neuromarketing y UX para guiar a
+                        tus visitantes hacia la compra o contacto.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon"><i class="fas fa-expand-arrows-alt"></i></div>
                     <h3>Escalabilidad Total</h3>
-                    <p>Tu negocio va a crecer. Construyo arquitecturas robustas que soportan desde 100 hasta 100.000 usuarios sin colapsar ni requerir reescrituras costosas.</p>
+                    <p>Tu negocio va a crecer. Construyo arquitecturas robustas que soportan desde 100 hasta 100.000
+                        usuarios sin colapsar ni requerir reescrituras costosas.</p>
                 </div>
             </div>
         </div>
@@ -1840,13 +2001,14 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Casos de Éxito</h2>
-                <p class="section-subtitle">Resultados reales para problemas reales. Así es como he ayudado a otras organizaciones a alcanzar sus objetivos.</p>
+                <p class="section-subtitle">Resultados reales para problemas reales. Así es como he ayudado a otras
+                    organizaciones a alcanzar sus objetivos.</p>
             </div>
 
             <div class="projects-grid">
                 <!-- Proyecto 1 - Sudeaseg -->
                 <div class="project-card">
-                   
+
                     <div class="project-image">
                         <img src="./img/sudeaseg.png" alt="Sudeaseg - Página Web Gubernamental">
                         <div class="project-overlay">
@@ -1861,7 +2023,9 @@
                             <span class="project-category">Sitio Web Institucional</span>
                         </div>
                         <h3 class="project-title">Modernización Gubernamental Sudeaseg</h3>
-                        <p class="project-description">Transformación digital completa para el ente regulador. Se optimizó el acceso a la información para miles de ciudadanos, reduciendo tiempos de carga en un 60% y mejorando la accesibilidad móvil.</p>
+                        <p class="project-description">Transformación digital completa para el ente regulador. Se
+                            optimizó el acceso a la información para miles de ciudadanos, reduciendo tiempos de carga en
+                            un 60% y mejorando la accesibilidad móvil.</p>
                         <div class="tech-stack">
                             <span class="tech-item">PHP</span>
                             <span class="tech-item">WordPress</span>
@@ -1879,68 +2043,74 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 2 - Panel Administrador -->
+                <!-- Proyecto 2 - Interviajes NY -->
                 <div class="project-card">
-                   
-                    <div class="project-image">
-                        <img src="./img/dashboard.png" alt="Dashboard Administrador Shadcn">
-                        <div class="project-overlay">
-                            <button class="project-view-btn project-demo-btn" data-project="dashboard">
-                                <i class="fas fa-play-circle"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-meta">
-                            <span class="project-date">2023 - 2024</span>
-                            <span class="project-category">Dashboard Admin</span>
-                        </div>
-                        <h3 class="project-title">Panel de Control en Tiempo Real</h3>
-                        <p class="project-description">Sistema de gestión empresarial que permite a los directivos tomar decisiones basadas en datos en vivo. Centraliza métricas críticas y elimina el uso de hojas de cálculo desactualizadas.</p>
-                        <div class="tech-stack">
-                            <span class="tech-item">Shadcn</span>
-                            <span class="tech-item">NodeJS</span>
-                            <span class="tech-item">Socket.io</span>
-                            <span class="tech-item">Django</span>
-                        </div>
-                        <div class="project-actions">
-                           
-                            <button class="project-info-btn" data-project="dashboard">
-                                <i class="fas fa-info-circle"></i> Detalles
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Proyecto 3 - Tienda E-commerce -->
-                <div class="project-card">
-                   
                     <div class="project-image">
-                        <img src="./img/tienda.png" alt="Tienda Virtual E-commerce Moderna">
+                        <img src="./img/interviajes.png" alt="Interviajes NY - Agencia de Excursiones y Tours">
                         <div class="project-overlay">
-                            <a href="https://tienda-nextjs-cris.vercel.app/" target="_blank" class="project-view-btn">
+                            <a href="https://www.interviajesny.com/" target="_blank" class="project-view-btn">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
                     <div class="project-content">
                         <div class="project-meta">
-                            <span class="project-date">2023</span>
-                            <span class="project-category">E-commerce</span>
+                            <span class="project-date">2024 - 2025</span>
+                            <span class="project-category">Turismo & E-commerce</span>
                         </div>
-                        <h3 class="project-title">E-commerce de Alta Conversión</h3>
-                        <p class="project-description">Tienda online diseñada para vender 24/7. Incluye gestión automática de inventario y pasarela de pagos segura. Optimizada para SEO, logrando posicionamiento orgánico en semanas.</p>
+                        <h3 class="project-title">Interviajes NY</h3>
+                        <p class="project-description">Plataforma de reserva de tours y excursiones en Nueva York.
+                            Desarrollada con WordPress y MySQL, optimizada para facilitar la reserva y gestión de
+                            experiencias turísticas.</p>
                         <div class="tech-stack">
-                            <span class="tech-item">Django</span>
-                            <span class="tech-item">NextJS</span>
-                            <span class="tech-item">Python</span>
-                            <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">WordPress</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">E-commerce</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://tienda-nextjs-cris.vercel.app/" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Ver demo
+                            <a href="https://www.interviajesny.com/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Visitar sitio
                             </a>
-                            <button class="project-info-btn" data-project="tienda">
+                            <button class="project-info-btn" data-project="interviajes">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 - Blackjack Consulting -->
+                <div class="project-card">
+
+                    <div class="project-image">
+                        <img src="./img/blackjack.png" alt="Blackjack Consulting - Agencia de Marketing">
+                        <div class="project-overlay">
+                            <a href="https://blackjackconsulting.com/" target="_blank" class="project-view-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2026</span>
+                            <span class="project-category">Marketing & Consulting</span>
+                        </div>
+                        <h3 class="project-title">Blackjack Consulting</h3>
+                        <p class="project-description">Sitio web corporativo para agencia de marketing. Desarrollado con
+                            WordPress y MySQL, enfocado en la captación de leads y presentación de servicios
+                            profesionales.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">WordPress</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">SEO</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://blackjackconsulting.com/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Visitar sitio
+                            </a>
+                            <button class="project-info-btn" data-project="blackjack">
                                 <i class="fas fa-info-circle"></i> Detalles
                             </button>
                         </div>
@@ -1949,11 +2119,12 @@
 
                 <!-- Proyecto 4 - Reconocimiento Facial -->
                 <div class="project-card">
-                   
+
                     <div class="project-image">
                         <img src="./img/reconocimientofacial.png" alt="Sistema de Reconocimiento Facial para Perros">
                         <div class="project-overlay">
-                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank" class="project-view-btn">
+                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank"
+                                class="project-view-btn">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
@@ -1964,7 +2135,8 @@
                             <span class="project-category">Inteligencia Artificial</span>
                         </div>
                         <h3 class="project-title">Reconocimiento Facial para Perros</h3>
-                        <p class="project-description">Sistema de reconocimiento facial de perros para control de acceso y autenticación biométrica con Python, OpenCV y TensorFlow.</p>
+                        <p class="project-description">Sistema de reconocimiento facial de perros para control de acceso
+                            y autenticación biométrica con Python, OpenCV y TensorFlow.</p>
                         <div class="tech-stack">
                             <span class="tech-item">Python</span>
                             <span class="tech-item">OpenCV</span>
@@ -1972,7 +2144,8 @@
                             <span class="tech-item">Flask</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank" class="project-link">
+                            <a href="https://www.sudeaseg.gob.ve/descargas/PerroFacial/" target="_blank"
+                                class="project-link">
                                 <i class="fas fa-file-alt"></i> Ver sitio
                             </a>
                             <button class="project-info-btn" data-project="facial">
@@ -1982,38 +2155,78 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 5 - App Móvil -->
+                <!-- Proyecto 5 - De Prada Moya Real Estate -->
                 <div class="project-card">
-                   
+
                     <div class="project-image">
-                        <img src="./img/appmovil.jpg" alt="Aplicación Móvil Flutter">
+                        <img src="./img/realestate.png" alt="De Prada Moya - Real Estate Luxury Properties">
                         <div class="project-overlay">
-                            <button class="project-view-btn project-demo-btn" data-project="mobile">
-                                <i class="fas fa-play-circle"></i>
-                            </button>
+                            <a href="https://depradamoya.com/" target="_blank" class="project-view-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="project-content">
                         <div class="project-meta">
-                            <span class="project-date">2022 - 2023</span>
-                            <span class="project-category">Aplicación Móvil</span>
+                            <span class="project-date">2024 - 2025</span>
+                            <span class="project-category">Bienes Raíces & Lujo</span>
                         </div>
-                        <h3 class="project-title">App Móvil con WebSocket</h3>
-                        <p class="project-description">App móvil con Flutter para UI nativa multiplataforma y backend con Node.js para API REST y servidor WebSocket en tiempo real.</p>
+                        <h3 class="project-title">De Prada Moya - Real Estate</h3>
+                        <p class="project-description">Plataforma inmobiliaria de lujo diseñada para la gestión y
+                            exhibición de propiedades exclusivas. Desarrollada con WordPress y MySQL, con un enfoque en
+                            la experiencia de usuario premium.</p>
                         <div class="tech-stack">
-                            <span class="tech-item">Flutter</span>
-                            <span class="tech-item">Firebase</span>
-                            <span class="tech-item">NodeJS</span>
-                            <span class="tech-item">WebSocket</span>
+                            <span class="tech-item">WordPress</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">Luxury UI</span>
                         </div>
                         <div class="project-actions">
-                            
+                            <a href="https://depradamoya.com/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Visitar sitio
+                            </a>
+                            <button class="project-info-btn" data-project="realestate">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Proyecto 6 - Más proyectos -->
-                
+                <!-- Proyecto 6 - FLANDER App -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./img/flander.png" alt="FLANDER App - Roommate Finder">
+                        <div class="project-overlay">
+                            <a href="https://flander.app/" target="_blank" class="project-view-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-date">2025</span>
+                            <span class="project-category">Aplicación Web</span>
+                        </div>
+                        <h3 class="project-title">FLANDER</h3>
+                        <p class="project-description">Plataforma integral para encontrar el compañero de piso ideal.
+                            Sitio web desarrollado en WordPress con MySQL, sincronizado con aplicaciones móviles nativas
+                            para Android e iOS.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">WordPress</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">Android & iOS</span>
+                            <span class="tech-item">API Rest</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://flander.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Visitar sitio
+                            </a>
+                            <button class="project-info-btn" data-project="flander">
+                                <i class="fas fa-info-circle"></i> Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -2027,17 +2240,23 @@
             </div>
             <div class="projects-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-quote">"Cristian transformó nuestra presencia digital. No solo entregó a tiempo, sino que nos asesoró en cada paso para mejorar nuestras ventas."</p>
+                    <p class="testimonial-quote">"Cristian transformó nuestra presencia digital. No solo entregó a
+                        tiempo, sino que nos asesoró en cada paso para mejorar nuestras ventas."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"><i class="fas fa-user"></i></div>
-                        <div class="author-info"><h4>Carlos Rodríguez</h4><span>CEO, Startup FinTech</span></div>
+                        <div class="author-info">
+                            <h4>Carlos Rodríguez</h4><span>CEO, Startup FinTech</span>
+                        </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-quote">"La capacidad técnica de Cristian es impresionante, pero su enfoque en el negocio es lo que realmente marca la diferencia. Altamente recomendado."</p>
+                    <p class="testimonial-quote">"La capacidad técnica de Cristian es impresionante, pero su enfoque en
+                        el negocio es lo que realmente marca la diferencia. Altamente recomendado."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"><i class="fas fa-user"></i></div>
-                        <div class="author-info"><h4>Ana Martínez</h4><span>Directora de Marketing</span></div>
+                        <div class="author-info">
+                            <h4>Ana Martínez</h4><span>Directora de Marketing</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2052,7 +2271,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-header">
-                
+
                 <h2 id="modalTitle"></h2>
                 <div class="modal-meta">
                     <span id="modalDate"></span>
@@ -2067,13 +2286,13 @@
                 <div class="modal-description">
                     <h4>Descripción del Proyecto</h4>
                     <p id="modalDescription"></p>
-                    
+
                     <h4>Tecnologías Utilizadas</h4>
                     <div class="modal-tech-stack" id="modalTechStack"></div>
-                    
+
                     <h4>Características Principales</h4>
                     <ul id="modalFeatures"></ul>
-                    
+
                     <h4>Desafíos y Soluciones</h4>
                     <p id="modalChallenges"></p>
                 </div>
@@ -2089,13 +2308,15 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Tecnología de Chat en Vivo</h2>
-                <p class="section-subtitle">Imagina ofrecer soporte instantáneo a tus clientes en tu propia web. Esta demo prueba mi capacidad para implementar sistemas de comunicación en tiempo real para tu negocio.</p>
+                <p class="section-subtitle">Imagina ofrecer soporte instantáneo a tus clientes en tu propia web. Esta
+                    demo prueba mi capacidad para implementar sistemas de comunicación en tiempo real para tu negocio.
+                </p>
             </div>
 
             <div class="demo-layout">
                 <aside>
                     <div class="sidebar-card">
-                        
+
                         <h3 style="margin-bottom: 1rem;">Usuarios Conectados</h3>
                         <div id="usersList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                             <span style="color: var(--text-light); font-size: 0.9rem;">Esperando conexión...</span>
@@ -2104,15 +2325,19 @@
                     </div>
 
                     <div class="sidebar-card">
-                        
-                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-light);">
-                        <h3 style="margin-bottom: 1rem;">Protocolo JSON</h3>
-                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
-                            <div style="margin-bottom: 0.5rem; color: #000000;"><strong style="color: var(--primary);">message:</strong> Chat text</div>
-                            <div style="margin-bottom: 0.5rem; color: #000000;"><strong style="color: var(--primary);">typing:</strong> Boolean</div>
-                            <div style="color: #000000;"><strong style="color: var(--primary);">users_list:</strong> Array</div>
+
+                        <div
+                            style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-light);">
+                            <h3 style="margin-bottom: 1rem;">Protocolo JSON</h3>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+                                <div style="margin-bottom: 0.5rem; color: #000000;"><strong
+                                        style="color: var(--primary);">message:</strong> Chat text</div>
+                                <div style="margin-bottom: 0.5rem; color: #000000;"><strong
+                                        style="color: var(--primary);">typing:</strong> Boolean</div>
+                                <div style="color: #000000;"><strong style="color: var(--primary);">users_list:</strong>
+                                    Array</div>
+                            </div>
                         </div>
-                    </div>
                 </aside>
 
                 <div class="chat-card">
@@ -2125,11 +2350,13 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn" style="padding: 0.4rem; background: rgba(255,255,255,0.1); color: white;"
+                            <button class="btn"
+                                style="padding: 0.4rem; background: rgba(255,255,255,0.1); color: white;"
                                 id="changeNameBtn">
                                 <i class="fas fa-pen"></i>
                             </button>
-                            <button class="btn" style="padding: 0.4rem; background: rgba(255,255,255,0.1); color: white;"
+                            <button class="btn"
+                                style="padding: 0.4rem; background: rgba(255,255,255,0.1); color: white;"
                                 id="reconnectBtn">
                                 <i class="fas fa-sync"></i>
                             </button>
@@ -2159,6 +2386,54 @@
         </div>
     </section>
 
+    <div class="thanos-overlay" id="thanosOverlay">
+        <h2 style="font-size: 3rem; margin-bottom: 1rem; color: var(--gold); font-family: 'Press Start 2P', cursive;">
+            ¡BOOM!</h2>
+        <p style="font-size: 1.5rem; margin-bottom: 2rem; font-weight: 700;">Todo el desorden ha desaparecido.</p>
+        <p style="font-size: 1.1rem; margin-bottom: 2.5rem; opacity: 0.9; max-width: 600px;">
+            En un mundo de código inestable, solo sobrevive la arquitectura de <strong>Cristian Aguilera</strong>.
+            ¿Listo para construir algo que sea realmente inevitable?
+        </p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
+            <button class="btn btn-primary" onclick="location.reload()" style="
+                background: linear-gradient(135deg, #f5c842, #ffa500); 
+                color: #000; 
+                padding: 1.2rem 2.5rem; 
+                font-weight: 900; 
+                border-radius: 50px; 
+                box-shadow: 0 0 20px rgba(245, 200, 66, 0.4), 0 10px 40px rgba(0,0,0,0.4);
+                border: 2px solid rgba(255,255,255,0.3);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                position: relative;
+                overflow: hidden;
+            " onmouseover="this.style.transform='scale(1.1) translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(245, 200, 66, 0.6)';" onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 0 20px rgba(245, 200, 66, 0.4), 0 10px 40px rgba(0,0,0,0.4)';">
+                <i class="fas fa-tools" style="font-size: 1.4rem;"></i> RECONSTRUIR MEJOR
+            </button>
+            <a href="#contact" onclick="location.reload()" class="btn" style="
+                background: rgba(255, 255, 255, 0.1); 
+                color: #fff; 
+                padding: 1rem 2rem; 
+                font-weight: 700; 
+                border-radius: 50px; 
+                border: 2px solid #fff;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(5px);
+            ">
+                <i class="fas fa-paper-plane" style="font-size: 1.2rem;"></i> CONTRATARME
+            </a>
+        </div>
+    </div>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -2166,7 +2441,8 @@
                 <div>
                     <h2>Empieza tu Transformación Digital</h2>
                     <p style="margin: 1rem 0 2rem; color: var(--text-light);">
-                        ¿Tienes una idea o un negocio que necesita escalar? No pierdas más tiempo con soluciones que no funcionan.
+                        ¿Tienes una idea o un negocio que necesita escalar? No pierdas más tiempo con soluciones que no
+                        funcionan.
                         Agenda una llamada y diseñemos un plan de acción a tu medida.
                     </p>
 
@@ -2210,9 +2486,15 @@
                         Entiendo que contratar desarrollo web puede generar incertidumbre. Por eso te ofrezco:
                     </p>
                     <ul style="text-align: left; list-style: none; margin-bottom: 2rem;">
-                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> <strong>Entregas por hitos:</strong> Pagas contra avance.</li>
-                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> <strong>Soporte Post-Lanzamiento:</strong> 30 días de garantía técnica gratuita.</li>
-                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> <strong>Código Propio:</strong> Tú eres el dueño del 100% de tu plataforma.</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"
+                                style="color: var(--success); margin-right: 10px;"></i> <strong>Entregas por
+                                hitos:</strong> Pagas contra avance.</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"
+                                style="color: var(--success); margin-right: 10px;"></i> <strong>Soporte
+                                Post-Lanzamiento:</strong> 30 días de garantía técnica gratuita.</li>
+                        <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"
+                                style="color: var(--success); margin-right: 10px;"></i> <strong>Código Propio:</strong>
+                            Tú eres el dueño del 100% de tu plataforma.</li>
                     </ul>
                     <a href="#contact" class="btn btn-primary" style="width: 100%;">Quiero trabajar contigo</a>
                 </div>
@@ -2229,13 +2511,14 @@
     <div class="floating-buttons">
         <!-- Botón WhatsApp flotante -->
         <a href="https://wa.me/584241222517?text=Hola%20Cristian,%20vi%20tu%20portafolio%20y%20me%20gustaría%20hablar."
-           target="_blank" class="whatsapp-float-btn" title="Contactar por WhatsApp">
+            target="_blank" class="whatsapp-float-btn" title="Contactar por WhatsApp">
             <i class="fab fa-whatsapp"></i>
             <span class="floating-btn-tooltip">Contactar por WhatsApp</span>
         </a>
-        
+
         <!-- Botón Descargar CV flotante -->
-        <a href="./img/Curriculum_Cristian_Aguilera_2026.pdf" download class="download-cv-btn" title="Descargar Curriculum">
+        <a href="./img/Curriculum_Cristian_Aguilera_2026.pdf" download class="download-cv-btn"
+            title="Descargar Curriculum">
             <i class="fas fa-file-download"></i>
             <span class="floating-btn-tooltip">Descargar CV</span>
         </a>
@@ -2246,36 +2529,36 @@
         const themeToggleBtn = document.getElementById('themeToggle');
         const mobileThemeToggleBtn = document.getElementById('mobileThemeToggle');
         const body = document.body;
-        
+
         // Check local storage or system preference
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'dark') {
             body.classList.add('dark-mode');
             updateIcons(true);
         }
-        
+
         function updateIcons(isDark) {
             const iconClass = isDark ? 'fa-sun' : 'fa-moon';
-            if(themeToggleBtn) themeToggleBtn.innerHTML = `<i class="fas ${iconClass}"></i>`;
-            if(mobileThemeToggleBtn) mobileThemeToggleBtn.innerHTML = `<i class="fas ${iconClass}"></i>`;
+            if (themeToggleBtn) themeToggleBtn.innerHTML = `<i class="fas ${iconClass}"></i>`;
+            if (mobileThemeToggleBtn) mobileThemeToggleBtn.innerHTML = `<i class="fas ${iconClass}"></i>`;
         }
-        
+
         function toggleTheme() {
             body.classList.toggle('dark-mode');
             const isDark = body.classList.contains('dark-mode');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateIcons(isDark);
         }
-        
-        if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
-        if(mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
 
         // Mobile Navigation
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
         const mobileNavClose = document.getElementById('mobileNavClose');
         const header = document.getElementById('mainHeader');
-        
+
         // Abrir menú móvil
         if (mobileMenuBtn && mobileNav) {
             mobileMenuBtn.addEventListener('click', () => {
@@ -2285,7 +2568,7 @@
                 document.body.style.overflow = 'hidden'; // Prevenir scroll
             });
         }
-        
+
         // Cerrar menú móvil
         if (mobileNavClose && mobileNav) {
             mobileNavClose.addEventListener('click', () => {
@@ -2295,7 +2578,7 @@
                 document.body.style.overflow = ''; // Restaurar scroll
             });
         }
-        
+
         // Cerrar menú al hacer clic en un enlace
         if (mobileNav) {
             const mobileLinks = mobileNav.querySelectorAll('a');
@@ -2308,7 +2591,7 @@
                 });
             });
         }
-        
+
         // Cerrar menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (mobileNav && mobileNav.classList.contains('active')) {
@@ -2320,7 +2603,7 @@
                 }
             }
         });
-        
+
         // Header scroll effect
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -2332,17 +2615,17 @@
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     const headerHeight = header.offsetHeight;
                     const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -2353,19 +2636,19 @@
 
         // Active navigation link based on scroll position
         const sections = document.querySelectorAll('section[id]');
-        
+
         const observerOptions = {
             root: null,
             rootMargin: '-20% 0px -70% 0px',
             threshold: 0
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const id = entry.target.getAttribute('id');
                 const navLink = document.querySelector(`.nav-links a[href="#${id}"]`);
                 const mobileNavLink = document.querySelector(`.mobile-nav a[href="#${id}"]`);
-                
+
                 if (entry.isIntersecting) {
                     navLink?.classList.add('active');
                     mobileNavLink?.classList.add('active');
@@ -2375,7 +2658,7 @@
                 }
             });
         }, observerOptions);
-        
+
         sections.forEach(section => observer.observe(section));
 
         // Project Modal Functionality
@@ -2408,49 +2691,70 @@
                     { text: "Visitar sitio web", icon: "fas fa-external-link-alt", url: "https://www.sudeaseg.gob.ve", type: "link" }
                 ]
             },
-            dashboard: {
-                title: "Panel Administrador Shadcn",
+            interviajes: {
+                title: "Interviajes NY",
                 date: "2023 - 2024",
-                category: "Dashboard Admin",
-                status: "Completado",
-                badgeColor: "linear-gradient(135deg, #7209b7, #9d4edd)",
-                badgeIcon: "fas fa-chart-line",
-                image: "./img/dashboard.png",
-                description: "Interfaz modular construida con componentes Shadcn UI, conectada a Django REST Framework para gestión de datos CRUD. Panel en tiempo real con WebSocket (Node.js/Socket.io) para notificaciones instantáneas y métricas dinámicas. Dashboard con gráficos interactivos (Recharts), tablas paginadas y formularios validados.",
-                techStack: ["Shadcn UI", "React", "Node.js", "Socket.io", "Django REST", "Tailwind CSS", "TypeScript"],
+                category: "Sitio Web de Turismo",
+                status: "Activo",
+                badgeColor: "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+                badgeIcon: "fas fa-plane",
+                image: "./img/interviajes.png",
+                description: "Plataforma integral de reserva para Interviajes NY, especializada en tours y excursiones por la ciudad de Nueva York. El sitio utiliza WordPress y MySQL para gestionar un catálogo dinámico de experiencias, integrando sistemas de reserva directa y pasarelas de pago para facilitar la planificación de viajes.",
+                techStack: ["WordPress", "MySQL", "PHP", "JavaScript", "WooCommerce", "SEO Optimization"],
                 features: [
-                    "Panel en tiempo real con WebSocket",
-                    "Gráficos interactivos y métricas dinámicas",
-                    "Sistema de notificaciones instantáneas",
-                    "Operaciones CRUD completas",
-                    "Diseño responsive y accesible"
+                    "Catálogo dinámico de tours y excursiones",
+                    "Sistema de reserva y pagos online",
+                    "Optimización para dispositivos móviles",
+                    "Gestión de contenido multi-idioma",
+                    "Integración con mapas y reseñas de clientes"
                 ],
-                challenges: "Sincronización en tiempo real entre múltiples usuarios y mantener la consistencia de datos. Se implementó un sistema de colas y validación en tiempo real usando WebSockets y optimistic updates.",
+                challenges: "Se requería un sistema que pudiera manejar reservas en tiempo real y ofrecer una experiencia de usuario fluida para turistas de todo el mundo. Se optimizó el flujo de reserva y la velocidad de carga para maximizar las conversiones.",
                 actions: [
-                    
+                    { text: "Visitar sitio oficial", icon: "fas fa-external-link-alt", url: "https://www.interviajesny.com/", type: "link" }
                 ]
             },
-            tienda: {
-                title: "Tienda Virtual E-commerce",
+            blackjack: {
+                title: "Blackjack Consulting",
                 date: "2023",
-                category: "Plataforma E-commerce",
-                status: "Demo Activa",
+                category: "Sitio Web Corporativo",
+                status: "Activo",
                 badgeColor: "linear-gradient(135deg, #10b981, #0da271)",
-                badgeIcon: "fas fa-shopping-cart",
-                image: "./img/tienda.png",
-                description: "Plataforma e-commerce full-stack con backend en Django REST Framework y PostgreSQL. Frontend moderno en Next.js con Tailwind CSS para diseño responsive. Sistema completo con catálogo, carrito, checkout y panel de administración. Arquitectura escalable y optimizada para alto rendimiento y SEO.",
-                techStack: ["Django", "Next.js", "Python", "PostgreSQL", "Tailwind CSS", "TypeScript", "REST API"],
+                badgeIcon: "fas fa-briefcase",
+                image: "./img/blackjack.png",
+                description: "Plataforma web profesional para Blackjack Consulting, una agencia especializada en servicios de marketing. El sitio está construido sobre WordPress utilizando MySQL para la gestión de datos, optimizado para la conversión de visitantes en clientes potenciales a través de un diseño limpio y persuasivo.",
+                techStack: ["WordPress", "MySQL", "PHP", "JavaScript", "SEO Optimization", "Tailwind CSS"],
                 features: [
-                    "Catálogo de productos con búsqueda y filtros",
-                    "Carrito de compras y checkout",
-                    "Panel de administración completo",
-                    "Pagos en línea integrados",
-                    "Optimización SEO y rendimiento"
+                    "Diseño corporativo premium y minimalista",
+                    "Optimización de velocidad de carga y SEO",
+                    "Sistema de gestión de servicios y portafolio",
+                    "Formularios de contacto avanzados para leads",
+                    "Integración con herramientas de análisis de marketing"
                 ],
-                challenges: "Manejar transacciones concurrentes y mantener la consistencia del inventario. Se implementó un sistema de bloqueo optimista y manejo de transacciones en la base de datos.",
+                challenges: "El objetivo principal fue reflejar la autoridad de la marca en el sector del marketing digital. Se implementaron técnicas de optimización on-page y una estructura de navegación intuitiva para mejorar la retención de usuarios.",
                 actions: [
-                    { text: "Visitar demo", icon: "fas fa-external-link-alt", url: "https://tienda-nextjs-cris.vercel.app/", type: "link" },
-                    
+                    { text: "Visitar sitio web", icon: "fas fa-external-link-alt", url: "https://blackjackconsulting.com/", type: "link" }
+                ]
+            },
+            realestate: {
+                title: "De Prada Moya - Real Estate",
+                date: "2024 - 2025",
+                category: "Bienes Raíces de Lujo",
+                status: "Activo",
+                badgeColor: "linear-gradient(135deg, #6366f1, #4f46e5)",
+                badgeIcon: "fas fa-home",
+                image: "./img/realestate.png",
+                description: "Plataforma inmobiliaria de lujo para De Prada Moya, diseñada para ofrecer una experiencia de búsqueda y visualización de propiedades de alta gama. El sitio utiliza WordPress y MySQL para gestionar un catálogo exclusivo de inmuebles, con tours virtuales y galerías de alta resolución.",
+                techStack: ["WordPress", "MySQL", "PHP", "JavaScript", "Custom Post Types", "Luxury UI Design"],
+                features: [
+                    "Buscador avanzado de propiedades de lujo",
+                    "Gestión de tours virtuales y galerías HD",
+                    "Fichas técnicas detalladas de inmuebles",
+                    "Integración con sistemas de CRM inmobiliario",
+                    "Diseño exclusivo y optimizado para móviles"
+                ],
+                challenges: "El reto fue crear una interfaz que transmitiera exclusividad y elegancia, manteniendo una carga rápida para imágenes de alta calidad. Se implementó lazy loading avanzado y optimización de activos para una experiencia fluida.",
+                actions: [
+                    { text: "Visitar sitio oficial", icon: "fas fa-external-link-alt", url: "https://depradamoya.com/", type: "link" }
                 ]
             },
             facial: {
@@ -2473,7 +2777,7 @@
                 challenges: "Crear un modelo de reconocimiento preciso para diferentes razas de perros con variaciones en pelaje y características faciales. Se entrenó un modelo personalizado con transfer learning y aumentación de datos.",
                 actions: [
                     { text: "Ver sitio", icon: "fas fa-file-alt", url: "https://www.sudeaseg.gob.ve/descargas/PerroFacial/", type: "link" },
-                   
+
                 ]
             },
             mobile: {
@@ -2497,6 +2801,29 @@
                 actions: [
                     { text: "Ver código", icon: "fas fa-code", type: "code" },
                     { text: "Demo de funcionalidad", icon: "fas fa-play-circle", type: "demo" }
+                ]
+            },
+            flander: {
+                title: "FLANDER App - Ecosistema Multiplataforma",
+                date: "2024",
+                category: "Web & Mobile App",
+                status: "Activo",
+                badgeColor: "linear-gradient(135deg, #f97316, #fb923c)",
+                badgeIcon: "fas fa-mobile-alt",
+                image: "./img/flander.png",
+                description: "Ecosistema digital completo diseñado para la búsqueda de compañeros de piso. La arquitectura utiliza WordPress y MySQL como núcleo de gestión de contenidos y base de datos, comunicándose vía API Rest con aplicaciones móviles nativas para Android e iOS. Ofrece una experiencia fluida y sincronizada en tiempo real entre todas las plataformas.",
+                techStack: ["WordPress", "MySQL", "Android (Java/Kotlin)", "iOS (Swift)", "API Rest", "PHP"],
+                features: [
+                    "Gestión centralizada de contenidos con WordPress",
+                    "Aplicaciones móviles nativas para Android e iOS",
+                    "Sincronización de datos en tiempo real vía API",
+                    "Sistema de perfiles y compatibilidad de usuarios",
+                    "Notificaciones push integradas en móviles"
+                ],
+                challenges: "El mayor desafío fue garantizar una comunicación eficiente y segura entre el núcleo de WordPress y las apps móviles nativas, manteniendo la integridad de los datos en tiempo real. Se desarrolló una capa de API personalizada para optimizar las consultas y respuestas.",
+                actions: [
+                    { text: "Visitar sitio oficial", icon: "fas fa-external-link-alt", url: "https://flander.app/", type: "link" },
+                    { text: "Consultar detalles", icon: "fas fa-info-circle", type: "article" }
                 ]
             }
         };
@@ -2523,25 +2850,25 @@
         function openProjectModal(projectId) {
             const project = projectsData[projectId];
             if (!project) return;
-            
+
             // Actualizar contenido del modal
             document.getElementById('modalTitle').textContent = project.title;
             document.getElementById('modalDate').textContent = project.date;
             document.getElementById('modalCategory').textContent = project.category;
             document.getElementById('modalStatus').textContent = project.status;
-            
+
             // Badge
             const badge = document.getElementById('modalBadge');
-            
-            
-            
+
+
+
             // Imagen
             document.getElementById('modalImage').src = project.image;
             document.getElementById('modalImage').alt = project.title;
-            
+
             // Descripción
             document.getElementById('modalDescription').textContent = project.description;
-            
+
             // Tech stack
             const techStackContainer = document.getElementById('modalTechStack');
             techStackContainer.innerHTML = '';
@@ -2551,7 +2878,7 @@
                 techItem.textContent = tech;
                 techStackContainer.appendChild(techItem);
             });
-            
+
             // Features
             const featuresList = document.getElementById('modalFeatures');
             featuresList.innerHTML = '';
@@ -2560,16 +2887,16 @@
                 li.textContent = feature;
                 featuresList.appendChild(li);
             });
-            
+
             // Challenges
             document.getElementById('modalChallenges').textContent = project.challenges;
-            
+
             // Actions
             const actionsContainer = document.getElementById('modalActions');
             actionsContainer.innerHTML = '';
             project.actions.forEach(action => {
                 const actionElement = document.createElement(action.type === 'link' ? 'a' : 'button');
-                
+
                 if (action.type === 'link') {
                     actionElement.href = action.url;
                     actionElement.target = '_blank';
@@ -2580,11 +2907,11 @@
                         handleProjectAction(projectId, action.type);
                     });
                 }
-                
+
                 actionElement.innerHTML = `<i class="${action.icon}"></i> ${action.text}`;
                 actionsContainer.appendChild(actionElement);
             });
-            
+
             // Mostrar modal
             projectModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -2828,28 +3155,28 @@
                 }, 3000);
             }
 
-            scrollToBottom() { 
+            scrollToBottom() {
                 setTimeout(() => {
                     this.elements.messagesArea.scrollTop = this.elements.messagesArea.scrollHeight;
                 }, 100);
             }
-            
-            escapeHtml(text) { 
-                const div = document.createElement('div'); 
-                div.textContent = text; 
-                return div.innerHTML; 
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
             }
 
             setupEventListeners() {
                 this.elements.messageInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) { 
-                        e.preventDefault(); 
-                        this.sendUserMessage(); 
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendUserMessage();
                     }
                 });
-                
-                this.elements.sendButton.addEventListener('click', () => { 
-                    this.sendUserMessage(); 
+
+                this.elements.sendButton.addEventListener('click', () => {
+                    this.sendUserMessage();
                 });
 
                 let typingTimer;
@@ -2857,22 +3184,22 @@
                     if (!this.isConnected) return;
                     this.sendTypingIndicator(true);
                     clearTimeout(typingTimer);
-                    typingTimer = setTimeout(() => { 
-                        this.sendTypingIndicator(false); 
+                    typingTimer = setTimeout(() => {
+                        this.sendTypingIndicator(false);
                     }, 1000);
                 });
 
                 document.getElementById('changeNameBtn').addEventListener('click', () => {
                     const newName = prompt('Ingresa tu nuevo nombre:', this.userName);
-                    if (newName && newName.trim() !== '') { 
-                        this.changeUserName(newName); 
+                    if (newName && newName.trim() !== '') {
+                        this.changeUserName(newName);
                     }
                 });
 
                 document.getElementById('reconnectBtn').addEventListener('click', () => {
-                    if (!this.isConnected) { 
-                        this.reconnectAttempts = 0; 
-                        this.connect(); 
+                    if (!this.isConnected) {
+                        this.reconnectAttempts = 0;
+                        this.connect();
                     }
                 });
             }
@@ -2887,14 +3214,14 @@
         // NOTIFICACIÓN AUTOMÁTICA DE VISITAS
         // ============================================
 
-        (function() {
+        (function () {
             // Solo ejecutar en producción (no en localhost para evitar spam)
-            const isLocalhost = window.location.hostname === 'localhost' || 
-                                window.location.hostname === '127.0.0.1';
-            
+            const isLocalhost = window.location.hostname === 'localhost' ||
+                window.location.hostname === '127.0.0.1';
+
             // Solo enviar una notificación por sesión
             //const alreadyNotified = sessionStorage.getItem('portfolioVisitNotified');
-            
+
             if (!isLocalhost) {
                 // Esperar 2 segundos para no bloquear la carga de la página
                 setTimeout(() => {
@@ -2914,7 +3241,7 @@
                     };
 
                     // URL de la API (relativa para producción, local para desarrollo)
-                    const apiUrl = isLocalhost 
+                    const apiUrl = isLocalhost
                         ? 'http://localhost:3000/api/notify-visit'
                         : '/api/notify-visit';
 
@@ -2928,42 +3255,110 @@
                         // Timeout de 3 segundos (no bloquear si hay error)
                         signal: AbortSignal.timeout(3000)
                     })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.success) {
-                            console.log('Perfil Cargado');
-                            // Marcar como notificado para esta sesión
-                            //sessionStorage.setItem('portfolioVisitNotified', 'true');
-                            
-                            // Opcional: enviar también a analytics
-                            if ('ga' in window) {
-                                ga('send', 'event', 'Visit', 'Notification Sent');
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP ${response.status}`);
                             }
-                        }
-                    })
-                    .catch(error => {
-                        // Error silencioso - no afecta la experiencia del usuario
-                        console.log('Perfil Erróneo');
-                        
-                        // Intentar con método alternativo si el primero falla
-                        if (!isLocalhost) {
-                            setTimeout(() => {
-                                // Método alternativo simple
-                                const img = new Image();
-                                img.src = `https://api.countapi.xyz/hit/portfolio-cristian-aguilera/visit?callback=${Date.now()}`;
-                            }, 1000);
-                        }
-                    });
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                console.log('Perfil Cargado');
+                                // Marcar como notificado para esta sesión
+                                //sessionStorage.setItem('portfolioVisitNotified', 'true');
+
+                                // Opcional: enviar también a analytics
+                                if ('ga' in window) {
+                                    ga('send', 'event', 'Visit', 'Notification Sent');
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            // Error silencioso - no afecta la experiencia del usuario
+                            console.log('Perfil Erróneo');
+
+                            // Intentar con método alternativo si el primero falla
+                            if (!isLocalhost) {
+                                setTimeout(() => {
+                                    // Método alternativo simple
+                                    const img = new Image();
+                                    img.src = `https://api.countapi.xyz/hit/portfolio-cristian-aguilera/visit?callback=${Date.now()}`;
+                                }, 1000);
+                            }
+                        });
                 }, 2000); // Esperar 2 segundos antes de enviar
             } else if (isLocalhost) {
                 console.log('🛠️ Modo desarrollo: Notificación de visita desactivada');
             }
         })();
+
+        // RPG Modal Functions
+        function openRpgModal() {
+            const modal = document.getElementById('rpgModal');
+            const frame = document.getElementById('rpgFrame');
+            frame.src = 'quest.html';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRpgModal() {
+            const modal = document.getElementById('rpgModal');
+            const frame = document.getElementById('rpgFrame');
+            frame.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // THANOS SNAP SIMULATION
+        function initThanosSnap() {
+            const btn = document.getElementById('thanosBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESANDO...';
+            btn.style.pointerEvents = 'none';
+
+            const elements = document.querySelectorAll('section, header, footer, .project-card, .tech-tag, .benefit-card');
+
+            // Reordenar aleatoriamente para el efecto de desvanecimiento
+            const shuffled = Array.from(elements).sort(() => Math.random() - 0.5);
+
+            shuffled.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('disintegrate');
+                    createDust(el);
+                }, index * 30);
+            });
+
+            setTimeout(() => {
+                document.getElementById('thanosOverlay').style.display = 'flex';
+                btn.style.display = 'none';
+            }, elements.length * 30 + 2000);
+        }
+
+        function createDust(el) {
+            const rect = el.getBoundingClientRect();
+            const count = 15;
+            for (let i = 0; i < count; i++) {
+                const dust = document.createElement('div');
+                dust.className = 'dust-particle';
+                const size = Math.random() * 4 + 2;
+                dust.style.width = size + 'px';
+                dust.style.height = size + 'px';
+                dust.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                dust.style.top = (rect.top + Math.random() * rect.height) + 'px';
+
+                document.body.appendChild(dust);
+
+                const anim = dust.animate([
+                    { transform: 'translate(0, 0) opacity(1)', filter: 'blur(0px)' },
+                    { transform: `translate(${(Math.random() - 0.5) * 100}px, -${100 + Math.random() * 200}px) opacity(0)`, filter: 'blur(4px)' }
+                ], {
+                    duration: 1500 + Math.random() * 1000,
+                    easing: 'ease-out'
+                });
+
+                anim.onfinish = () => dust.remove();
+            }
+        }
     </script>
 </body>
+
 </html>
